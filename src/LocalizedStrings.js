@@ -20,7 +20,7 @@ export default class LocalizedStrings{
     //If an object with the passed language key exists return it
     if (props[language]) return language;
     //if the string is composed try to find a match with only the first language identifiers (en-US --> en)
-    let idx = language.indexOf("-");
+    var idx = language.indexOf("-");
     if (idx>=0) {
       language = language.substring(0,idx);
       if (props[language]) return language;

@@ -15,6 +15,7 @@
     "localization",
     "internationalization"
   ],
+  "main":"./lib/LocalizedStrings.js",
   "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
   "license": "MIT",
   "bugs": {
