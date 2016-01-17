@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,7 @@
     "localization",
     "internationalization"
   ],
-  "main":"./lib/LocalizedStrings.js",
+  "main": "./lib/LocalizedStrings.js",
   "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
   "license": "MIT",
   "bugs": {
