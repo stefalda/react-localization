@@ -1,7 +1,7 @@
 'use strict';
 /**
- * Simple module to localize the React interface using the same syntax 
- * used in the ReactNativeLocalization module 
+ * Simple module to localize the React interface using the same syntax
+ * used in the ReactNativeLocalization module
  * (https://github.com/stefalda/ReactNativeLocalization)
  *
  * Originally developed by Stefano Falda (stefano.falda@gmail.com)
@@ -31,7 +31,7 @@ export default class LocalizedStrings{
 
 
   constructor(props) {
-    let interfaceLanguage = (navigator.language || navigator.userLanguage);
+    let interfaceLanguage = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage || 'en-US');
     //Store locally the passed strings
     this.props = props;
     //Set language to its default value (the interface)
