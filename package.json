@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
