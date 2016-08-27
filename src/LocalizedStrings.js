@@ -51,7 +51,7 @@ export default class LocalizedStrings{
         //Associate the language object to the this object
         if (this.props[bestLanguage]){
           //console.log("There are strings for the language:"+language);
-          var localizedStrings = this.props[this.language];
+          var localizedStrings = Object.assign(this.props[Object.keys(this.props)[0]], this.props[this.language]);
           for (var key in localizedStrings){
             //console.log("Checking property:"+key);
             if (localizedStrings.hasOwnProperty(key)) {
