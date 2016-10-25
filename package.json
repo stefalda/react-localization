@@ -1,5 +1,5 @@
 {
-  "name": "react-localization",
+  "name": "kg-react-localization",
   "version": "0.0.7",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "scripts": {
