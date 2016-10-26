@@ -31,10 +31,10 @@ export default class LocalizedStrings{
 
 
   constructor(props) {
-    let interfaceLanguage = (navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') ? navigator.languages[0] : 
-            ((navigator.language && typeof navigator.language !== 'undefined') ? navigator.language : 
-            ((navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') ? navigator.userLanguage :
-            'en-US')); 
+    var interfaceLanguage = (typeof navigator !== 'undefined' && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') ? navigator.languages[0] :
+        ((typeof navigator !== 'undefined' && navigator.language && typeof navigator.language !== 'undefined') ? navigator.language :
+            ((typeof navigator !== 'undefined' && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') ? navigator.userLanguage :
+                'en-US'));
     //Store locally the passed strings
     this.props = props;
     //Set language to its default value (the interface)
