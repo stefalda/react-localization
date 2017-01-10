@@ -42,9 +42,9 @@ export default class LocalizedStrings{
   }
 
   //Can be used from ouside the class to force a particular language
-  //indipendently from the interface one
+  //independently from the interface one
   setLanguage(language){
-        //Check if exists a translation for the current language or if the default
+        //Check if a translation exists for the current language or if the default
         //should be used
         var bestLanguage = this._getBestMatchingLanguage(language, this.props);
         this.language = bestLanguage;
