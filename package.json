@@ -1,32 +1,32 @@
 {
-    "name": "react-localization",
-    "version": "0.0.10",
-    "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module, use 'npm run build' before publishing",
-    "scripts": {
-        "babel-version": "babel --version",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "babel ./src/LocalizedStrings.js --presets babel-preset-es2015 --out-file ./lib/LocalizedStrings.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/stefalda/react-localization.git"
-    },
-    "keywords": [
-        "react-component",
-        "react",
-        "localization",
-        "internationalization"
-    ],
-    "main": "./lib/LocalizedStrings.js",
-    "types": "./lib/LocalizedStrings.d.ts",
-    "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/stefalda/react-localization/issues"
-    },
-    "homepage": "https://github.com/stefalda/react-localization#readme",
-    "devDependencies": {
-        "babel-cli": "^6.22.2",
-        "babel-preset-es2015": "^6.22.0"
-    }
+  "name": "react-localization",
+  "version": "0.0.11",
+  "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module, use 'npm run build' before publishing",
+  "scripts": {
+    "babel-version": "babel --version",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./src/LocalizedStrings.js --presets babel-preset-es2015 --out-file ./lib/LocalizedStrings.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefalda/react-localization.git"
+  },
+  "keywords": [
+    "react-component",
+    "react",
+    "localization",
+    "internationalization"
+  ],
+  "main": "./lib/LocalizedStrings.js",
+  "types": "./lib/LocalizedStrings.d.ts",
+  "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefalda/react-localization/issues"
+  },
+  "homepage": "https://github.com/stefalda/react-localization#readme",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0"
+  }
 }
