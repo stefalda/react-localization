@@ -14,7 +14,24 @@
  * Check the instructions at:
  * https://github.com/stefalda/react-localization
  */
+
+const DEFAULT_VALUE = 'en-US';
+
 export default class LocalizedStrings {
+    _getInterfaceLanguage() {
+        let lang = null;
+        if (typeof navigator !== 'undefined' && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
+            lang = navigator.languages[0];
+        } else if (typeof navigator !== 'undefined' && navigator.language && typeof navigator.language !== 'undefined') {
+            lang = navigator.language;
+        } else if (typeof navigator !== 'undefined' && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') {
+            lang = navigator.userLanguage;
+        } else if (typeof navigator !== 'undefined' && navigator.browserLanguage && typeof navigator.browserLanguage !== 'undefined') {
+            lang = navigator.browserLanguage;
+        }
+        return lang || DEFAULT_VALUE;
+    }
+
 
     _getBestMatchingLanguage(language, props) {
         //If an object with the passed language key exists return it
@@ -31,10 +48,7 @@ export default class LocalizedStrings {
 
 
     constructor(props) {
-        this.interfaceLanguage = (typeof navigator !== 'undefined' && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') ? navigator.languages[0] :
-            ((typeof navigator !== 'undefined' && navigator.language && typeof navigator.language !== 'undefined') ? navigator.language :
-                ((typeof navigator !== 'undefined' && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') ? navigator.userLanguage :
-                    'en-US'));
+        this.interfaceLanguage = this._getInterfaceLanguage();
         //Store locally the passed strings
         this.props = props;
         this.defaultLanguage = Object.keys(props)[0];
