@@ -36,14 +36,11 @@ export default class LocalizedStrings {
     _getBestMatchingLanguage(language, props) {
         //If an object with the passed language key exists return it
         if (props[language]) return language;
+
         //if the string is composed try to find a match with only the first language identifiers (en-US --> en)
-        var idx = language.indexOf("-");
-        if (idx >= 0) {
-            language = language.substring(0, idx);
-            if (props[language]) return language;
-        }
-        //Return the default language (the first coded)
-        return Object.keys(props)[0];
+        const idx = language.indexOf('-');
+        const auxLang = (idx >= 0) ? language.substring(0, idx) : language;
+        return props[auxLang] ? auxLang : Object.keys(props)[0];
     }
 
 
@@ -122,7 +119,7 @@ export default class LocalizedStrings {
         return null;
     }
 
-    //Replace all occorrencies of a string in another using RegExp
+    //Replace all occurrences of a string in another using RegExp
     _replaceAll(find, replace, str) {
         //Escape find
         find = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
