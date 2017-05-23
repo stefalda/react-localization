@@ -54,26 +54,44 @@ export default class LocalizedStrings {
     }
 
     //Can be used from ouside the class to force a particular language
-    //independently from the interface one
+    //indipendently from the interface one
     setLanguage(language) {
-        //Check if a translation exists for the current language or if the default
+        //Check if exists a translation for the current language or if the default
         //should be used
         var bestLanguage = this._getBestMatchingLanguage(language, this.props);
+        var defaultLanguage = Object.keys(this.props)[0];
         this.language = bestLanguage;
         //Associate the language object to the this object
         if (this.props[bestLanguage]) {
-            //console.log("There are strings for the language:"+language);
-            //Merge default 
-            var localizedStrings = {...this.props[this.defaultLanguage], ...this.props[this.language] };
+            var localizedStrings = Object.assign({}, this.props[defaultLanguage], this.props[this.language]);
             for (var key in localizedStrings) {
-                //console.log("Checking property:"+key);
                 if (localizedStrings.hasOwnProperty(key)) {
-                    //console.log("Associating property:"+key);
                     this[key] = localizedStrings[key];
+                }
+            }
+            //Now add any string missing from the translation but existing in the default language
+            if (defaultLanguage !== this.language) {
+                localizedStrings = this.props[defaultLanguage];
+                this._fallbackValues(localizedStrings, this);
+            }
+        }
+    }
+
+    //Load fallback values for missing translations 
+    _fallbackValues(defaultStrings, strings) {
+        for (var key in defaultStrings) {
+            if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
+                strings[key] = defaultStrings[key];
+                console.log("Missing localization for language '" + this.language + "' and key '" + key + "'.");
+            } else {
+                if (typeof strings[key] != "string") {
+                    //Si tratta di un oggetto
+                    this._fallbackValues(defaultStrings[key], strings[key]);
                 }
             }
         }
     }
+
 
     //The current language displayed (could differ from the interface language
     // if it has been forced manually and a matching translation has been found)
