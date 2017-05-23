@@ -49,7 +49,7 @@ Then use the `strings` object literal directly in the render method accessing th
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
 * formatString() - to format the passed string replacing its placeholders with the other arguments strings
-
+* setProps(props) - to dynamically load another set of strings
 ```js
   en:{
     bread:"bread",
