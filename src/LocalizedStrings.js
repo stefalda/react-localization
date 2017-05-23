@@ -48,10 +48,10 @@ export default class LocalizedStrings {
         //Add property before checking for use of reserved words...
         this._interfaceLanguage = this._getInterfaceLanguage();
         this._language = this._interfaceLanguage;
-        this.setProps(props);
+        this.setContent(props);
     }
 
-    setProps(props){
+    setContent(props){
         this._defaultLanguage = Object.keys(props)[0];
         this._defaultLanguageFirstLevelKeys = [];
         //Store locally the passed strings

@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/stefalda/react-localization#readme",
   "devDependencies": {
-    "babel-cli": "^6.22.2",
+    "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
     "jasmine": "^2.6.0",

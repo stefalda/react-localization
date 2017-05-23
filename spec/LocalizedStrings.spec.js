@@ -97,7 +97,7 @@ describe('Main Library Functions', function () {
   });
 
   it('Switch to different props', function () {
-    strings.setProps(
+    strings.setContent(
       secondarySet
     )
     strings.setLanguage("fr");

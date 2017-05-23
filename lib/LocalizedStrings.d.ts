@@ -6,7 +6,7 @@ declare module "react-localization" {
         formatString(str: string, ...values: any[]): string;
         getAvailableLanguages(): string[];
         getString(key: string, language: string): string;
-        setProps(props: any): void;
+        setContent(props: any): void;
     }
 
     interface LocalizedStringsFactory {
