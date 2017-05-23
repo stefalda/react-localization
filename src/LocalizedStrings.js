@@ -45,33 +45,59 @@ export default class LocalizedStrings {
 
 
     constructor(props) {
-        this.interfaceLanguage = this._getInterfaceLanguage();
-        //Store locally the passed strings
-        this.props = props;
-        this.defaultLanguage = Object.keys(props)[0];
-        //Set language to its default value (the interface)
-        this.setLanguage(this.interfaceLanguage);
+        //Add property before checking for use of reserved words...
+        this._interfaceLanguage = this._getInterfaceLanguage();
+        this._language = this._interfaceLanguage;
+        this.setProps(props);
     }
+
+    setProps(props){
+        this._defaultLanguage = Object.keys(props)[0];
+        this._defaultLanguageFirstLevelKeys = [];
+        //Store locally the passed strings
+        this._props = props;
+        //Check for use of reserved words
+        this._validateProps(props[this._defaultLanguage]);
+        //Store first level keys (for identifying missing translations)
+        for (var key in this._props[this._defaultLanguage]) {
+                if (typeof this._props[this._defaultLanguage][key]=="string") {
+                    this._defaultLanguageFirstLevelKeys.push(key);
+                }
+            }
+        //Set language to its default value (the interface)
+        this.setLanguage(this._interfaceLanguage);
+    }
+
+    _validateProps(props) {
+        Object.keys(props).map(key => {
+            if (this.hasOwnProperty(key)) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
+        })
+    }
+
 
     //Can be used from ouside the class to force a particular language
     //indipendently from the interface one
     setLanguage(language) {
         //Check if exists a translation for the current language or if the default
         //should be used
-        var bestLanguage = this._getBestMatchingLanguage(language, this.props);
-        var defaultLanguage = Object.keys(this.props)[0];
-        this.language = bestLanguage;
+        var bestLanguage = this._getBestMatchingLanguage(language, this._props);
+        var defaultLanguage = Object.keys(this._props)[0];
+        this._language = bestLanguage;
         //Associate the language object to the this object
-        if (this.props[bestLanguage]) {
-            var localizedStrings = Object.assign({}, this.props[defaultLanguage], this.props[this.language]);
+        if (this._props[bestLanguage]) {
+            //delete default propery values to identify missing translations
+            for (key of this._defaultLanguageFirstLevelKeys){
+                delete this[key];
+            }
+            var localizedStrings = Object.assign({}, this._props[this._language]);
             for (var key in localizedStrings) {
                 if (localizedStrings.hasOwnProperty(key)) {
                     this[key] = localizedStrings[key];
                 }
             }
             //Now add any string missing from the translation but existing in the default language
-            if (defaultLanguage !== this.language) {
-                localizedStrings = this.props[defaultLanguage];
+            if (defaultLanguage !== this._language) {
+                localizedStrings = this._props[defaultLanguage];
                 this._fallbackValues(localizedStrings, this);
             }
         }
@@ -82,10 +108,10 @@ export default class LocalizedStrings {
         for (var key in defaultStrings) {
             if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
                 strings[key] = defaultStrings[key];
-                console.log("Missing localization for language '" + this.language + "' and key '" + key + "'.");
+                console.log(`🚧 👷 key '${key}' not found in localizedStrings for language ${this._language} 🚧`);
             } else {
                 if (typeof strings[key] != "string") {
-                    //Si tratta di un oggetto
+                    //It's an object
                     this._fallbackValues(defaultStrings[key], strings[key]);
                 }
             }
@@ -96,23 +122,23 @@ export default class LocalizedStrings {
     //The current language displayed (could differ from the interface language
     // if it has been forced manually and a matching translation has been found)
     getLanguage() {
-        return this.language;
+        return this._language;
     }
 
     //The current interface language (could differ from the language displayed)
     getInterfaceLanguage() {
-        return this.interfaceLanguage;
+        return this._interfaceLanguage;
     }
 
     //Return an array containing the available languages passed as props in the constructor
     getAvailableLanguages() {
-        if (!this.availableLanguages) {
-            this.availableLanguages = [];
-            for (let language in this.props) {
-                this.availableLanguages.push(language);
+        if (!this._availableLanguages) {
+            this._availableLanguages = [];
+            for (let language in this._props) {
+                this._availableLanguages.push(language);
             }
         }
-        return this.availableLanguages;
+        return this._availableLanguages;
     }
 
     //Format the passed string replacing the numbered placeholders
@@ -130,7 +156,7 @@ export default class LocalizedStrings {
     //Return a string with the passed key in a different language 
     getString(key, language) {
         try {
-            return this.props[language][key];
+            return this._props[language][key];
         } catch (ex) {
             console.log("No localization found for key " + key + " and language " + language);
         }

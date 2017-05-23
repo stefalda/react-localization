@@ -1,6 +1,7 @@
 import LocalizedStrings from './../src/LocalizedStrings';
 let  strings = new LocalizedStrings({
  en:{
+   language:"english",
    how:"How do you want your egg today?",
    boiledEgg:"Boiled egg",
    softBoiledEgg:"Soft-boiled egg",
@@ -9,7 +10,7 @@ let  strings = new LocalizedStrings({
    ratings:{
      excellent:"excellent",
      good:"good",
-     missing:"missing value"
+     missingComplex:"missing value"
    },
    missing:"missing value"
  },
@@ -26,10 +27,24 @@ let  strings = new LocalizedStrings({
  }
 });
 
+const secondarySet = {
+  fr:{
+    "hello":"bonjour"
+  },
+  en:{
+    "hello":"hello"
+  },
+  it:{
+    "hello":"ciao"
+  }
+
+
+}
+
 describe('Main Library Functions', function () {
 
   it("Set default language to en", function(){
-    expect(strings.language).toEqual("en");
+    expect(strings.getLanguage()).toEqual("en");
   });
 
   it("List available languages", function(){
@@ -44,7 +59,7 @@ describe('Main Library Functions', function () {
     expect(strings.ratings.good).toEqual('good');
   });
   it('Get complex missing key from default language', function () {
-    expect(strings.ratings.missing).toEqual('missing value');
+    expect(strings.ratings.missingComplex).toEqual('missing value');
   });
   it('Get missing key from default language', function () {
     expect(strings.ratings.notfound).toBe(undefined);
@@ -56,7 +71,7 @@ describe('Main Library Functions', function () {
   //Switch language
   it("Switch language to italian", function(){
     strings.setLanguage("it");
-    expect(strings.language).toEqual("it");
+    expect(strings.getLanguage()).toEqual("it");
   });
   it('Extract simple value from  other language', function () {
     expect(strings.how).toEqual('Come vuoi il tuo uovo oggi?');
@@ -71,7 +86,7 @@ describe('Main Library Functions', function () {
   });
 
   it('Get complex missing key from other language', function () {
-    expect(strings.ratings.missing).toEqual('missing value');
+    expect(strings.ratings.missingComplex).toEqual('missing value');
   });
   it('Format string in other language', function () {
     expect(strings.formatString(strings.formattedValue, "torta", "gelato")).toBe("Vorrei un po' di torta e gelato, o solo torta");
@@ -79,6 +94,14 @@ describe('Main Library Functions', function () {
 
   it('Get string in a different language', function () {
     expect(strings.getString("choice", "en")).toBe("How to choose the egg");
+  });
+
+  it('Switch to different props', function () {
+    strings.setProps(
+      secondarySet
+    )
+    strings.setLanguage("fr");
+    expect(strings.hello).toEqual('bonjour');
   });
 
 });
