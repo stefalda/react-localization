@@ -16,7 +16,11 @@
  */
 
 const DEFAULT_VALUE = 'en-US';
-
+let reservedNames = [ '_interfaceLanguage',
+                    '_language',
+                    '_defaultLanguage',
+                    '_defaultLanguageFirstLevelKeys',
+                    '_props' ];
 export default class LocalizedStrings {
     _getInterfaceLanguage() {
         let lang = null;
@@ -45,7 +49,6 @@ export default class LocalizedStrings {
 
 
     constructor(props) {
-        //Add property before checking for use of reserved words...
         this._interfaceLanguage = this._getInterfaceLanguage();
         this._language = this._interfaceLanguage;
         this.setContent(props);
@@ -70,7 +73,7 @@ export default class LocalizedStrings {
 
     _validateProps(props) {
         Object.keys(props).map(key => {
-            if (this.hasOwnProperty(key)) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
+            if (reservedNames.indexOf(key)>=0) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
         })
     }
 

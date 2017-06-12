@@ -1,4 +1,5 @@
 import LocalizedStrings from './../src/LocalizedStrings';
+
 let  strings = new LocalizedStrings({
  en:{
    language:"english",
@@ -37,8 +38,22 @@ const secondarySet = {
   it:{
     "hello":"ciao"
   }
+}
 
+const contentForTesting = {
+ en: {
+   a: {
+     b: { x: "a.b.x", y: "a.b.y" },
+     c: { z: "a.c.z" }
+    }
+ }
+};
 
+const forbiddenContent = {
+  en:{
+    language:"language",
+    _language:"language is forbidden"
+  }
 }
 
 describe('Main Library Functions', function () {
@@ -103,5 +118,28 @@ describe('Main Library Functions', function () {
     strings.setLanguage("fr");
     expect(strings.hello).toEqual('bonjour');
   });
+
+it('Switch to different props not working', function () {
+    strings = new LocalizedStrings({
+          en: {
+            a: {
+              b: { x: "foo", y: "bar" },
+              c: { z: "baz" }
+              }
+          }
+          });
+    strings.setContent(
+      contentForTesting
+    )
+    strings.setLanguage("en");
+    expect(strings.a.b.x).toEqual('a.b.x');
+  });
+
+it('Should throw an exception if a reserved word is used', function(){
+  expect( function(){ 
+    strings = new LocalizedStrings(forbiddenContent);
+   } ).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
+  
+});
 
 });
