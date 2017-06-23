@@ -111,7 +111,6 @@ export default class LocalizedStrings {
         for (var key in defaultStrings) {
             if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
                 strings[key] = defaultStrings[key];
-                console.log(`🚧 👷 key '${key}' not found in localizedStrings for language ${this._language} 🚧`);
             } else {
                 if (typeof strings[key] != "string") {
                     //It's an object
