@@ -175,11 +175,4 @@ export default class LocalizedStrings {
         }
         return null;
     }
-
-    //Replace all occurrences of a string in another using RegExp
-    _replaceAll(find, replace, str) {
-        //Escape find
-        find = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-        return str.replace(new RegExp(find, 'g'), replace);
-    }
 }
