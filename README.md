@@ -53,7 +53,7 @@ Then use the `strings` object literal directly in the render method accessing th
   en:{
     bread:"bread",
     butter:"butter",
-    question:"I'd like {0} and {1}, or just {0}",
+    question:"I'd like {0} and {1}, or just {0}"
     ...
     login: 'login',
     onlyForMembers: 'You have to {0} in order to use our app',
