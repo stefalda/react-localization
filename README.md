@@ -49,7 +49,6 @@ Then use the `strings` object literal directly in the render method accessing th
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
 * formatString() - to format the passed string replacing its placeholders with the other arguments strings
-* setContent(props) - to dynamically load another set of strings
 ```js
   en:{
     bread:"bread",
@@ -60,6 +59,7 @@ Then use the `strings` object literal directly in the render method accessing th
   strings.formatString(strings.question, strings.bread, strings.butter)
 ```
 **Beware: do not define a string key as formatString!**
+* setContent(props) - to dynamically load another set of strings
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
 
 ## Examples
