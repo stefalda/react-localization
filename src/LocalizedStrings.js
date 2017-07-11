@@ -152,12 +152,12 @@ export default class LocalizedStrings {
     //i.e. I'd like some {0} and {1}, or just {0}
     //Use example:
     //  strings.formatString(strings.question, strings.bread, strings.butter)
-    formatString(str, ...values) {
+    formatString(str, ...valuesForPlaceholders) {
         return str
             .split(placeholderRegex)
             .map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
-                    const valueForPlaceholder = values[textPart.slice(1, -1)];
+                    const valueForPlaceholder = valuesForPlaceholders[textPart.slice(1, -1)];
                     return isReactComponent(valueForPlaceholder)
                         ? React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index}))
                         : valueForPlaceholder;
