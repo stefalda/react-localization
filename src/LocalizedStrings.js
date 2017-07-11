@@ -153,8 +153,9 @@ export default class LocalizedStrings {
     //Use example:
     //  strings.formatString(strings.question, strings.bread, strings.butter)
     formatString(str, ...values) {
-        if (values.some(isReactComponent)) {
-            const result = str.split(placeholderRegex).map((textPart, index) => {
+        return str
+            .split(placeholderRegex)
+            .map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
                     const valueForPlaceholder = values[parseInt(textPart.slice(1, -1))];
                     if (isReactComponent(valueForPlaceholder)) {
@@ -165,15 +166,6 @@ export default class LocalizedStrings {
                 }
                 return textPart;
             });
-            return result;
-        }
-        else {
-            let res = str;
-            for (let i = 0; i < values.length; i++) {
-                res = this._replaceAll("{" + i + "}", values[i], res); //
-            }
-            return res;
-        }
     }
 
     //Return a string with the passed key in a different language 
