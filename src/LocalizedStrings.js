@@ -156,12 +156,12 @@ export default class LocalizedStrings {
         if (values.some(isReactComponent)) {
             const result = str.split(placeholderRegex).map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
-                    const reactComponent = values[parseInt(textPart.slice(1, -1))];
-                    if (isReactComponent(reactComponent)) {
-                        return React.Children.toArray(reactComponent)
+                    const valueForPlaceholder = values[parseInt(textPart.slice(1, -1))];
+                    if (isReactComponent(valueForPlaceholder)) {
+                        return React.Children.toArray(valueForPlaceholder)
                             .map(component => ({...component, key: index}));
                     }
-                    return reactComponent;
+                    return valueForPlaceholder;
                 }
                 return textPart;
             });
