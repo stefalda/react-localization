@@ -28,13 +28,13 @@ let reservedNames = [ '_interfaceLanguage',
 export default class LocalizedStrings {
     _getInterfaceLanguage() {
         let lang = null;
-        if (typeof navigator !== 'undefined' && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
+        if (!!navigator && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
             lang = navigator.languages[0];
-        } else if (typeof navigator !== 'undefined' && navigator.language && typeof navigator.language !== 'undefined') {
+        } else if (!!navigator && navigator.language && typeof navigator.language !== 'undefined') {
             lang = navigator.language;
-        } else if (typeof navigator !== 'undefined' && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') {
+        } else if (!!navigator && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') {
             lang = navigator.userLanguage;
-        } else if (typeof navigator !== 'undefined' && navigator.browserLanguage && typeof navigator.browserLanguage !== 'undefined') {
+        } else if (!!navigator && navigator.browserLanguage && typeof navigator.browserLanguage !== 'undefined') {
             lang = navigator.browserLanguage;
         }
         return lang || DEFAULT_VALUE;
