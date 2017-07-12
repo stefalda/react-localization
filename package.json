@@ -33,5 +33,7 @@
     "jasmine-core": "^2.6.2",
     "jasmine-es6": "^0.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^15.6.1"
+  }
 }
