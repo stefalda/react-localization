@@ -144,7 +144,7 @@ describe('Main Library Functions', function () {
     });
 
     it('returns first in languages if set', () => {
-      global.navigator = {languages: ['it']};
+      global.navigator = {languages: ['it', 'fr']};
       expect(strings._getInterfaceLanguage()).toBe('it');
     });
 
