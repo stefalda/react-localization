@@ -3,14 +3,14 @@ import LocalizedStrings from './../src/LocalizedStrings';
 describe('Main Library Functions', function () {
   global.navigator = {};
   let strings = new LocalizedStrings({
-    en:{
+    en: {
       language:"english",
       how:"How do you want your egg today?",
       boiledEgg:"Boiled egg",
       softBoiledEgg:"Soft-boiled egg",
       choice:"How to choose the egg",
       formattedValue:"I'd like some {0} and {1}, or just {0}",
-      ratings:{
+      ratings: {
         excellent:"excellent",
         good:"good",
         missingComplex:"missing value"
@@ -22,7 +22,7 @@ describe('Main Library Functions', function () {
       boiledEgg:"Uovo sodo",
       softBoiledEgg:"Uovo alla coque",
       choice:"Come scegliere l'uovo",
-        ratings:{
+      ratings: {
         excellent:"eccellente",
         good:"buono"
       },
