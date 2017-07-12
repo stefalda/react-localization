@@ -1,4 +1,4 @@
-import LocalizedStrings from './../src/LocalizedStrings';
+import LocalizedStrings from '../src/LocalizedStrings';
 
 describe('Main Library Functions', function () {
   global.navigator = {};
