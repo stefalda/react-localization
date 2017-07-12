@@ -5,7 +5,7 @@
   "scripts": {
     "babel-version": "babel --version",
     "test": "jasmine",
-    "build": "babel ./src/LocalizedStrings.js --presets babel-preset-es2015,babel-preset-stage-2 --out-file ./lib/LocalizedStrings.js"
+    "build": "babel src --out-dir lib --presets=es2015,stage-2"
   },
   "repository": {
     "type": "git",
