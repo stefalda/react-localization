@@ -1,33 +1,5 @@
 import LocalizedStrings from './../src/LocalizedStrings';
 
-const secondarySet = {
-  fr:{
-    "hello":"bonjour"
-  },
-  en:{
-    "hello":"hello"
-  },
-  it:{
-    "hello":"ciao"
-  }
-}
-
-const contentForTesting = {
- en: {
-   a: {
-     b: { x: "a.b.x", y: "a.b.y" },
-     c: { z: "a.c.z" }
-    }
- }
-};
-
-const forbiddenContent = {
-  en:{
-    language:"language",
-    _language:"language is forbidden"
-  }
-}
-
 describe('Main Library Functions', function () {
   let strings;
   beforeAll(() => {
@@ -117,9 +89,17 @@ describe('Main Library Functions', function () {
   });
 
   it('Switch to different props', function () {
-    strings.setContent(
-      secondarySet
-    )
+    strings.setContent({
+      fr: {
+        "hello":"bonjour"
+      },
+      en: {
+        "hello":"hello"
+      },
+      it: {
+        "hello":"ciao"
+      }
+    });
     strings.setLanguage("fr");
     expect(strings.hello).toEqual('bonjour');
   });
@@ -133,16 +113,26 @@ it('Switch to different props not working', function () {
               }
           }
           });
-    strings.setContent(
-      contentForTesting
-    )
+    strings.setContent({
+      en: {
+        a: {
+          b: { x: "a.b.x", y: "a.b.y" },
+          c: { z: "a.c.z" }
+        }
+      }
+    });
     strings.setLanguage("en");
     expect(strings.a.b.x).toEqual('a.b.x');
   });
 
 it('Should throw an exception if a reserved word is used', function(){
   expect( function(){ 
-    strings = new LocalizedStrings(forbiddenContent);
+    strings = new LocalizedStrings({
+      en: {
+        language: "language",
+        _language: "language is forbidden"
+      }
+    });
    } ).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
   
 });
