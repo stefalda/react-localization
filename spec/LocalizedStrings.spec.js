@@ -1,33 +1,5 @@
 import LocalizedStrings from './../src/LocalizedStrings';
 
-let  strings = new LocalizedStrings({
- en:{
-   language:"english",
-   how:"How do you want your egg today?",
-   boiledEgg:"Boiled egg",
-   softBoiledEgg:"Soft-boiled egg",
-   choice:"How to choose the egg",
-   formattedValue:"I'd like some {0} and {1}, or just {0}",
-   ratings:{
-     excellent:"excellent",
-     good:"good",
-     missingComplex:"missing value"
-   },
-   missing:"missing value"
- },
- it: {
-   how:"Come vuoi il tuo uovo oggi?",
-   boiledEgg:"Uovo sodo",
-   softBoiledEgg:"Uovo alla coque",
-   choice:"Come scegliere l'uovo",
-    ratings:{
-     excellent:"eccellente",
-     good:"buono"
-   },
-   formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
- }
-});
-
 const secondarySet = {
   fr:{
     "hello":"bonjour"
@@ -57,6 +29,37 @@ const forbiddenContent = {
 }
 
 describe('Main Library Functions', function () {
+  let strings;
+  beforeAll(() => {
+    global.navigator = {};
+    strings = new LocalizedStrings({
+      en:{
+        language:"english",
+        how:"How do you want your egg today?",
+        boiledEgg:"Boiled egg",
+        softBoiledEgg:"Soft-boiled egg",
+        choice:"How to choose the egg",
+        formattedValue:"I'd like some {0} and {1}, or just {0}",
+        ratings:{
+          excellent:"excellent",
+          good:"good",
+          missingComplex:"missing value"
+        },
+        missing:"missing value"
+      },
+      it: {
+        how:"Come vuoi il tuo uovo oggi?",
+        boiledEgg:"Uovo sodo",
+        softBoiledEgg:"Uovo alla coque",
+        choice:"Come scegliere l'uovo",
+          ratings:{
+          excellent:"eccellente",
+          good:"buono"
+        },
+        formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
+      }
+    });
+  });
 
   it("Set default language to en", function(){
     expect(strings.getLanguage()).toEqual("en");
