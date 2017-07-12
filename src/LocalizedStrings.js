@@ -19,7 +19,6 @@ import React from 'react';
 const placeholderRegex = /(\{\d+\})/;
 const isReactComponent = value => typeof value.$$typeof === 'symbol';
 
-const DEFAULT_VALUE = 'en-US';
 let reservedNames = [ '_interfaceLanguage',
                     '_language',
                     '_defaultLanguage',
@@ -36,7 +35,7 @@ export default class LocalizedStrings {
         } else if (!!navigator && !!navigator.browserLanguage) {
             return navigator.browserLanguage;
         }
-        return DEFAULT_VALUE;
+        return 'en-US';
     }
 
 
