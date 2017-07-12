@@ -155,6 +155,7 @@ export default class LocalizedStrings {
     formatString(str, ...valuesForPlaceholders) {
         return str
             .split(placeholderRegex)
+            .filter(textPart => !!textPart)
             .map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
                     const valueForPlaceholder = valuesForPlaceholders[textPart.slice(1, -1)];
