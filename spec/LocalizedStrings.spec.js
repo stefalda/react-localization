@@ -1,62 +1,34 @@
-import LocalizedStrings from './../src/LocalizedStrings';
-
-let  strings = new LocalizedStrings({
- en:{
-   language:"english",
-   how:"How do you want your egg today?",
-   boiledEgg:"Boiled egg",
-   softBoiledEgg:"Soft-boiled egg",
-   choice:"How to choose the egg",
-   formattedValue:"I'd like some {0} and {1}, or just {0}",
-   ratings:{
-     excellent:"excellent",
-     good:"good",
-     missingComplex:"missing value"
-   },
-   missing:"missing value"
- },
- it: {
-   how:"Come vuoi il tuo uovo oggi?",
-   boiledEgg:"Uovo sodo",
-   softBoiledEgg:"Uovo alla coque",
-   choice:"Come scegliere l'uovo",
-    ratings:{
-     excellent:"eccellente",
-     good:"buono"
-   },
-   formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
- }
-});
-
-const secondarySet = {
-  fr:{
-    "hello":"bonjour"
-  },
-  en:{
-    "hello":"hello"
-  },
-  it:{
-    "hello":"ciao"
-  }
-}
-
-const contentForTesting = {
- en: {
-   a: {
-     b: { x: "a.b.x", y: "a.b.y" },
-     c: { z: "a.c.z" }
-    }
- }
-};
-
-const forbiddenContent = {
-  en:{
-    language:"language",
-    _language:"language is forbidden"
-  }
-}
+import LocalizedStrings from '../src/LocalizedStrings';
 
 describe('Main Library Functions', function () {
+  global.navigator = {};
+  let strings = new LocalizedStrings({
+    en: {
+      language:"english",
+      how:"How do you want your egg today?",
+      boiledEgg:"Boiled egg",
+      softBoiledEgg:"Soft-boiled egg",
+      choice:"How to choose the egg",
+      formattedValue:"I'd like some {0} and {1}, or just {0}",
+      ratings: {
+        excellent:"excellent",
+        good:"good",
+        missingComplex:"missing value"
+      },
+      missing:"missing value"
+    },
+    it: {
+      how:"Come vuoi il tuo uovo oggi?",
+      boiledEgg:"Uovo sodo",
+      softBoiledEgg:"Uovo alla coque",
+      choice:"Come scegliere l'uovo",
+      ratings: {
+        excellent:"eccellente",
+        good:"buono"
+      },
+      formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
+    }
+  });
 
   it("Set default language to en", function(){
     expect(strings.getLanguage()).toEqual("en");
@@ -114,14 +86,22 @@ describe('Main Library Functions', function () {
   });
 
   it('Switch to different props', function () {
-    strings.setContent(
-      secondarySet
-    )
+    strings.setContent({
+      fr: {
+        "hello":"bonjour"
+      },
+      en: {
+        "hello":"hello"
+      },
+      it: {
+        "hello":"ciao"
+      }
+    });
     strings.setLanguage("fr");
     expect(strings.hello).toEqual('bonjour');
   });
 
-it('Switch to different props not working', function () {
+  it('Switch to different props not working', function () {
     strings = new LocalizedStrings({
           en: {
             a: {
@@ -130,18 +110,26 @@ it('Switch to different props not working', function () {
               }
           }
           });
-    strings.setContent(
-      contentForTesting
-    )
+    strings.setContent({
+      en: {
+        a: {
+          b: { x: "a.b.x", y: "a.b.y" },
+          c: { z: "a.c.z" }
+        }
+      }
+    });
     strings.setLanguage("en");
     expect(strings.a.b.x).toEqual('a.b.x');
   });
 
-it('Should throw an exception if a reserved word is used', function(){
-  expect( function(){ 
-    strings = new LocalizedStrings(forbiddenContent);
-   } ).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
-  
-});
-
+  it('Should throw an exception if a reserved word is used', () => {
+    expect(() => { 
+      strings = new LocalizedStrings({
+        en: {
+          language: "language",
+          _language: "language is forbidden"
+        }
+      });
+    }).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
+  });
 });

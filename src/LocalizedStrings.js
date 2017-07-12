@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react';
+
+import * as utils from './utils';
 /**
  * Simple module to localize the React interface using the same syntax
  * used in the ReactNativeLocalization module
@@ -19,28 +21,12 @@ import React from 'react';
 const placeholderRegex = /(\{\d+\})/;
 const isReactComponent = value => typeof value.$$typeof === 'symbol';
 
-const DEFAULT_VALUE = 'en-US';
 let reservedNames = [ '_interfaceLanguage',
                     '_language',
                     '_defaultLanguage',
                     '_defaultLanguageFirstLevelKeys',
                     '_props' ];
 export default class LocalizedStrings {
-    _getInterfaceLanguage() {
-        let lang = null;
-        if (typeof navigator !== 'undefined' && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
-            lang = navigator.languages[0];
-        } else if (typeof navigator !== 'undefined' && navigator.language && typeof navigator.language !== 'undefined') {
-            lang = navigator.language;
-        } else if (typeof navigator !== 'undefined' && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') {
-            lang = navigator.userLanguage;
-        } else if (typeof navigator !== 'undefined' && navigator.browserLanguage && typeof navigator.browserLanguage !== 'undefined') {
-            lang = navigator.browserLanguage;
-        }
-        return lang || DEFAULT_VALUE;
-    }
-
-
     _getBestMatchingLanguage(language, props) {
         //If an object with the passed language key exists return it
         if (props[language]) return language;
@@ -53,7 +39,7 @@ export default class LocalizedStrings {
 
 
     constructor(props) {
-        this._interfaceLanguage = this._getInterfaceLanguage();
+        this._interfaceLanguage = utils.getInterfaceLanguage();
         this._language = this._interfaceLanguage;
         this.setContent(props);
     }
