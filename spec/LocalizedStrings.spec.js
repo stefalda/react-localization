@@ -79,7 +79,7 @@ describe('Main Library Functions', function () {
   it('Get missing key from default language', function () {
     expect(strings.ratings.notfound).toBe(undefined);
   });
-  it('Format string in default languate', function () {
+  it('Format string in default language', function () {
     expect(strings.formatString(strings.formattedValue, "cake", "ice-cream")).toBe("I'd like some cake and ice-cream, or just cake");
   });
 
