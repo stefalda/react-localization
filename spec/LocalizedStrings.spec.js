@@ -1,36 +1,33 @@
 import LocalizedStrings from './../src/LocalizedStrings';
 
 describe('Main Library Functions', function () {
-  let strings;
-  beforeAll(() => {
-    global.navigator = {};
-    strings = new LocalizedStrings({
-      en:{
-        language:"english",
-        how:"How do you want your egg today?",
-        boiledEgg:"Boiled egg",
-        softBoiledEgg:"Soft-boiled egg",
-        choice:"How to choose the egg",
-        formattedValue:"I'd like some {0} and {1}, or just {0}",
-        ratings:{
-          excellent:"excellent",
-          good:"good",
-          missingComplex:"missing value"
-        },
-        missing:"missing value"
+  global.navigator = {};
+  let strings = new LocalizedStrings({
+    en:{
+      language:"english",
+      how:"How do you want your egg today?",
+      boiledEgg:"Boiled egg",
+      softBoiledEgg:"Soft-boiled egg",
+      choice:"How to choose the egg",
+      formattedValue:"I'd like some {0} and {1}, or just {0}",
+      ratings:{
+        excellent:"excellent",
+        good:"good",
+        missingComplex:"missing value"
       },
-      it: {
-        how:"Come vuoi il tuo uovo oggi?",
-        boiledEgg:"Uovo sodo",
-        softBoiledEgg:"Uovo alla coque",
-        choice:"Come scegliere l'uovo",
-          ratings:{
-          excellent:"eccellente",
-          good:"buono"
-        },
-        formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
-      }
-    });
+      missing:"missing value"
+    },
+    it: {
+      how:"Come vuoi il tuo uovo oggi?",
+      boiledEgg:"Uovo sodo",
+      softBoiledEgg:"Uovo alla coque",
+      choice:"Come scegliere l'uovo",
+        ratings:{
+        excellent:"eccellente",
+        good:"buono"
+      },
+      formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
+    }
   });
 
   it("Set default language to en", function(){
@@ -134,5 +131,11 @@ describe('Main Library Functions', function () {
         }
       });
     } ).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
+  });
+
+  describe('getInterfaceLanguage', () => {
+    it('returns default language if not set', () => {
+      expect(strings._getInterfaceLanguage()).toBe('en-US');
+    })
   });
 });
