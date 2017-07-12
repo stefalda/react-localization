@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react';
+
+import * as utils from './utils';
 /**
  * Simple module to localize the React interface using the same syntax
  * used in the ReactNativeLocalization module
@@ -25,20 +27,6 @@ let reservedNames = [ '_interfaceLanguage',
                     '_defaultLanguageFirstLevelKeys',
                     '_props' ];
 export default class LocalizedStrings {
-    _getInterfaceLanguage() {
-        if (!!navigator && !!navigator.language) {
-            return navigator.language;
-        } else if (!!navigator && !!navigator.languages && !!navigator.languages[0]) {
-            return navigator.languages[0];
-        } else if (!!navigator && !!navigator.userLanguage) {
-            return navigator.userLanguage;
-        } else if (!!navigator && !!navigator.browserLanguage) {
-            return navigator.browserLanguage;
-        }
-        return 'en-US';
-    }
-
-
     _getBestMatchingLanguage(language, props) {
         //If an object with the passed language key exists return it
         if (props[language]) return language;
@@ -51,7 +39,7 @@ export default class LocalizedStrings {
 
 
     constructor(props) {
-        this._interfaceLanguage = this._getInterfaceLanguage();
+        this._interfaceLanguage = utils.getInterfaceLanguage();
         this._language = this._interfaceLanguage;
         this.setContent(props);
     }

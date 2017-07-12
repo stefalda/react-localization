@@ -132,40 +132,4 @@ describe('Main Library Functions', function () {
       });
     }).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
   });
-
-  describe('getInterfaceLanguage', () => {
-    it('returns default language if not set', () => {
-      expect(strings._getInterfaceLanguage()).toBe('en-US');
-    });
-
-    it('returns language when found', () => {
-      global.navigator = {language: 'fi'};
-      expect(strings._getInterfaceLanguage()).toBe('fi');
-    });
-
-    it('returns first in languages if set', () => {
-      global.navigator = {languages: ['it', 'fr']};
-      expect(strings._getInterfaceLanguage()).toBe('it');
-    });
-
-    it('returns userLanguage if set', () => {
-      global.navigator = {userLanguage: 'fi'};
-      expect(strings._getInterfaceLanguage()).toBe('fi');
-    });
-
-    it('returns browserLanguage if set', () => {
-      global.navigator = {browserLanguage: 'it'};
-      expect(strings._getInterfaceLanguage()).toBe('it');
-    });
-
-    it('returns language when all properties are available', () => {
-      global.navigator = {
-        language: 'hu',
-        languages: ['fr'],
-        userLanguage: 'de',
-        browserLanguage: 'it',
-      };
-      expect(strings._getInterfaceLanguage()).toBe('hu');
-    });
-  });
 });
