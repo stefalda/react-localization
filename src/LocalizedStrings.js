@@ -27,17 +27,16 @@ let reservedNames = [ '_interfaceLanguage',
                     '_props' ];
 export default class LocalizedStrings {
     _getInterfaceLanguage() {
-        let lang = null;
         if (!!navigator && navigator.languages && typeof navigator.languages !== 'undefined' && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
-            lang = navigator.languages[0];
+            return navigator.languages[0];
         } else if (!!navigator && navigator.language && typeof navigator.language !== 'undefined') {
-            lang = navigator.language;
+            return navigator.language;
         } else if (!!navigator && navigator.userLanguage && typeof navigator.userLanguage !== 'undefined') {
-            lang = navigator.userLanguage;
+            return navigator.userLanguage;
         } else if (!!navigator && navigator.browserLanguage && typeof navigator.browserLanguage !== 'undefined') {
-            lang = navigator.browserLanguage;
+            return navigator.browserLanguage;
         }
-        return lang || DEFAULT_VALUE;
+        return DEFAULT_VALUE;
     }
 
 
