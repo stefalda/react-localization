@@ -122,7 +122,7 @@ describe('Main Library Functions', function () {
     expect(strings.a.b.x).toEqual('a.b.x');
   });
 
-  it('Should throw an exception if a reserved word is used', function() {
+  it('Should throw an exception if a reserved word is used', () => {
     expect(() => { 
       strings = new LocalizedStrings({
         en: {
