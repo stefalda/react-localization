@@ -123,14 +123,14 @@ describe('Main Library Functions', function () {
   });
 
   it('Should throw an exception if a reserved word is used', function() {
-    expect( function(){ 
+    expect(() => { 
       strings = new LocalizedStrings({
         en: {
           language: "language",
           _language: "language is forbidden"
         }
       });
-    } ).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
+    }).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
   });
 
   describe('getInterfaceLanguage', () => {
