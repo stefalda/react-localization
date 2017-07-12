@@ -27,7 +27,7 @@ let reservedNames = [ '_interfaceLanguage',
                     '_props' ];
 export default class LocalizedStrings {
     _getInterfaceLanguage() {
-        if (!!navigator && !!navigator.languages && navigator.languages[0] && typeof navigator.languages[0] !== 'undefined') {
+        if (!!navigator && !!navigator.languages && !!navigator.languages[0]) {
             return navigator.languages[0];
         } else if (!!navigator && !!navigator.language) {
             return navigator.language;
