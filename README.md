@@ -49,17 +49,26 @@ Then use the `strings` object literal directly in the render method accessing th
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
 * formatString() - to format the passed string replacing its placeholders with the other arguments strings
-* setContent(props) - to dynamically load another set of strings
 ```js
   en:{
     bread:"bread",
     butter:"butter",
     question:"I'd like {0} and {1}, or just {0}"
+    ...
+    login: 'login',
+    onlyForMembers: 'You have to {0} in order to use our app',
+    bold: 'bold',
+    iAmText: 'I am {0} text',
   }
   ...
   strings.formatString(strings.question, strings.bread, strings.butter)
+
+  // you can also use React component as placeholder values! Useful when using links or customizing style
+  strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
+  strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
 ```
 **Beware: do not define a string key as formatString!**
+* setContent(props) - to dynamically load another set of strings
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
 
 ## Examples

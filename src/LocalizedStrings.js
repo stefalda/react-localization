@@ -1,4 +1,5 @@
 'use strict';
+import React from 'react';
 /**
  * Simple module to localize the React interface using the same syntax
  * used in the ReactNativeLocalization module
@@ -14,6 +15,9 @@
  * Check the instructions at:
  * https://github.com/stefalda/react-localization
  */
+
+const placeholderRegex = /(\{\d+\})/;
+const isReactComponent = value => typeof value.$$typeof === 'symbol';
 
 const DEFAULT_VALUE = 'en-US';
 let reservedNames = [ '_interfaceLanguage',
@@ -148,12 +152,18 @@ export default class LocalizedStrings {
     //i.e. I'd like some {0} and {1}, or just {0}
     //Use example:
     //  strings.formatString(strings.question, strings.bread, strings.butter)
-    formatString(str, ...values) {
-        var res = str;
-        for (let i = 0; i < values.length; i++) {
-            res = this._replaceAll("{" + i + "}", values[i], res);
-        }
-        return res;
+    formatString(str, ...valuesForPlaceholders) {
+        return str
+            .split(placeholderRegex)
+            .map((textPart, index) => {
+                if (textPart.match(placeholderRegex)) {
+                    const valueForPlaceholder = valuesForPlaceholders[textPart.slice(1, -1)];
+                    return isReactComponent(valueForPlaceholder)
+                        ? React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index}))
+                        : valueForPlaceholder;
+                }
+                return textPart;
+            });
     }
 
     //Return a string with the passed key in a different language 
@@ -164,12 +174,5 @@ export default class LocalizedStrings {
             console.log("No localization found for key " + key + " and language " + language);
         }
         return null;
-    }
-
-    //Replace all occurrences of a string in another using RegExp
-    _replaceAll(find, replace, str) {
-        //Escape find
-        find = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-        return str.replace(new RegExp(find, 'g'), replace);
     }
 }
