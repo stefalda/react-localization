@@ -159,7 +159,7 @@ describe('Main Library Functions', function () {
         .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can ", [<b key="3">enter</b>]]);
     });
 
-    it('one React component in one string', () => {
+    it('one React component twice in a string', () => {
       expect(reactStrings.formatString(reactStrings.helloThere, <i>Henrik</i>))
         .toEqual(["Hello ", [<i key="1">Henrik</i>], "! Are you sure ", [<i key="3">Henrik</i>], " is your name?"]);
     });
