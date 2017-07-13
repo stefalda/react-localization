@@ -11,7 +11,7 @@ export function getInterfaceLanguage() {
   return 'en-US';
 }
 
-export function validateProps(props) {
+export function validateTranslationKeys(props) {
   const reservedNames = [
     '_interfaceLanguage',
     '_language',
