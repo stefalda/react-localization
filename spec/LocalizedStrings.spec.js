@@ -139,15 +139,22 @@ describe('Main Library Functions', function () {
     let newStrings = new LocalizedStrings({
       en: {
         onlyForMembers: "Only who have {0} can enter",
+        onlyForMembersStrong: "Only who have {0} can {1}",
       },
       fi: {
         onlyForMembers: "Vain {0} voivat tulla",
+        onlyForMembersStrong: "Vain {0} voivat {1}",
       }
     });
-    
-    it('adds React component', () => {
+
+    it('one React component', () => {
       expect(newStrings.formatString(newStrings.onlyForMembers, <a href="#">logged in</a>))
-        .toEqual(["Only who have ", [<a href="#" key={1}>logged in</a>], " can enter"]);
+        .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can enter"]);
+    });
+
+    it('two React component', () => {
+      expect(newStrings.formatString(newStrings.onlyForMembersStrong, <a href="#">logged in</a>, <b>enter</b>))
+        .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can ", [<b key="3">enter</b>]]);
     });
   });
 });
