@@ -19,7 +19,7 @@ export function validateProps(props) {
     '_defaultLanguageFirstLevelKeys',
     '_props',
   ];
-  Object.keys(props).map(key => {
+  Object.keys(props).forEach(key => {
     if (reservedNames.indexOf(key)>=0) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
   });
 }
