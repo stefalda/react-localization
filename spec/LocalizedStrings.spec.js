@@ -124,17 +124,6 @@ describe('Main Library Functions', function () {
     expect(strings.a.b.x).toEqual('a.b.x');
   });
 
-  it('Should throw an exception if a reserved word is used', () => {
-    expect(() => { 
-      strings = new LocalizedStrings({
-        en: {
-          language: "language",
-          _language: "language is forbidden"
-        }
-      });
-    }).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
-  });
-
   describe('formatString with React components', () => {
     const reactStrings = new LocalizedStrings({
       en: {

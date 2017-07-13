@@ -41,4 +41,12 @@ describe('validateProps', () => {
   it('does not throw an error when using non-reserved name', () => {
     expect(() => utils.validateProps({hello: 'hello'})).not.toThrow();
   });
+
+  it('throws an error when using reserve name', () => {
+    expect(() => utils.validateProps({_interfaceLanguage: 'hello'})).toThrow();
+  });
+  
+  it('throws an error when using reserve name with valid names', () => {
+    expect(() => utils.validateProps({hello: 'hello', _interfaceLanguage: 'hello'})).toThrow();
+  });
 });
