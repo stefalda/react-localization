@@ -39,14 +39,14 @@ describe('getInterfaceLanguage', () => {
 
 describe('validateTranslationKeys', () => {
   it('does not throw an error when using non-reserved name', () => {
-    expect(() => utils.validateTranslationKeys({hello: 'hello'})).not.toThrow();
+    expect(() => utils.validateTranslationKeys(['hello'])).not.toThrow();
   });
 
   it('throws an error when using reserve name', () => {
-    expect(() => utils.validateTranslationKeys({_interfaceLanguage: 'hello'})).toThrow();
+    expect(() => utils.validateTranslationKeys(['_interfaceLanguage'])).toThrow();
   });
   
   it('throws an error when using reserve name with valid names', () => {
-    expect(() => utils.validateTranslationKeys({hello: 'hello', _interfaceLanguage: 'hello'})).toThrow();
+    expect(() => utils.validateTranslationKeys(['hello', '_interfaceLanguage'])).toThrow();
   });
 });

@@ -11,7 +11,7 @@ export function getInterfaceLanguage() {
   return 'en-US';
 }
 
-export function validateTranslationKeys(props) {
+export function validateTranslationKeys(translationKeys) {
   const reservedNames = [
     '_interfaceLanguage',
     '_language',
@@ -19,7 +19,7 @@ export function validateTranslationKeys(props) {
     '_defaultLanguageFirstLevelKeys',
     '_props',
   ];
-  Object.keys(props).forEach(key => {
+  translationKeys.forEach(key => {
     if (reservedNames.includes(key)) {
       throw new Error(`${key} cannot be used as a key. It is a reserved word.`);
     }
