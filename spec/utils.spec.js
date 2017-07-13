@@ -36,3 +36,9 @@ describe('getInterfaceLanguage', () => {
     expect(utils.getInterfaceLanguage()).toBe('hu');
   });
 });
+
+describe('validateProps', () => {
+  it('does not throw an error when using non-reserved name', () => {
+    expect(() => utils.validateProps({hello: 'hello'})).not.toThrow();
+  });
+});
