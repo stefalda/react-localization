@@ -1,3 +1,5 @@
+import React from 'react';
+
 import LocalizedStrings from '../src/LocalizedStrings';
 
 describe('Main Library Functions', function () {
@@ -131,5 +133,21 @@ describe('Main Library Functions', function () {
         }
       });
     }).toThrow(new Error("_language cannot be used as a key. It is a reserved word."));
+  });
+
+  describe('formatString with React components', () => {
+    let newStrings = new LocalizedStrings({
+      en: {
+        onlyForMembers: "Only who have {0} can enter",
+      },
+      fi: {
+        onlyForMembers: "Vain {0} voivat tulla",
+      }
+    });
+    
+    it('adds React component', () => {
+      expect(newStrings.formatString(newStrings.onlyForMembers, <a href="#">logged in</a>))
+        .toEqual(["Only who have ", [<a href="#" key={1}>logged in</a>], " can enter"]);
+    });
   });
 });

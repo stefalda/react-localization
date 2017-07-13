@@ -146,7 +146,7 @@ export default class LocalizedStrings {
                 if (textPart.match(placeholderRegex)) {
                     const valueForPlaceholder = valuesForPlaceholders[textPart.slice(1, -1)];
                     return isReactComponent(valueForPlaceholder)
-                        ? React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index}))
+                        ? React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}))
                         : valueForPlaceholder;
                 }
                 return textPart;
