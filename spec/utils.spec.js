@@ -47,6 +47,6 @@ describe('validateTranslationKeys', () => {
   });
   
   it('throws an error when using reserve name with valid names', () => {
-    expect(() => utils.validateTranslationKeys(['hello', '_interfaceLanguage'])).toThrow();
+    expect(() => utils.validateTranslationKeys(['hello', '_defaultLanguageFirstLevelKeys'])).toThrow();
   });
 });
