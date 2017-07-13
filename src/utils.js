@@ -20,6 +20,6 @@ export function validateProps(props) {
     '_props',
   ];
   Object.keys(props).forEach(key => {
-    if (reservedNames.indexOf(key)>=0) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
+    if (reservedNames.includes(key)) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
   });
 }
