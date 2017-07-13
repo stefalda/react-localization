@@ -44,7 +44,6 @@ export default class LocalizedStrings {
         this._defaultLanguageFirstLevelKeys = [];
         //Store locally the passed strings
         this._props = props;
-        //Check for use of reserved words
         utils.validateTranslationKeys(Object.keys(props[this._defaultLanguage]));
         //Store first level keys (for identifying missing translations)
         for (var key in this._props[this._defaultLanguage]) {
