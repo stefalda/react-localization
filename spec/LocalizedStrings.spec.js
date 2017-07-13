@@ -136,25 +136,32 @@ describe('Main Library Functions', function () {
   });
 
   describe('formatString with React components', () => {
-    let newStrings = new LocalizedStrings({
+    const reactStrings = new LocalizedStrings({
       en: {
         onlyForMembers: "Only who have {0} can enter",
         onlyForMembersStrong: "Only who have {0} can {1}",
+        helloThere: "Hello {0}! Are you sure {0} is your name?",
       },
       fi: {
         onlyForMembers: "Vain {0} voivat tulla",
         onlyForMembersStrong: "Vain {0} voivat {1}",
+        helloThere: "Moi {0}! Onko {0} varmasti nimesi?",
       }
     });
 
     it('one React component', () => {
-      expect(newStrings.formatString(newStrings.onlyForMembers, <a href="#">logged in</a>))
+      expect(reactStrings.formatString(reactStrings.onlyForMembers, <a href="#">logged in</a>))
         .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can enter"]);
     });
 
     it('two React component', () => {
-      expect(newStrings.formatString(newStrings.onlyForMembersStrong, <a href="#">logged in</a>, <b>enter</b>))
+      expect(reactStrings.formatString(reactStrings.onlyForMembersStrong, <a href="#">logged in</a>, <b>enter</b>))
         .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can ", [<b key="3">enter</b>]]);
+    });
+
+    it('one React component in one string', () => {
+      expect(reactStrings.formatString(reactStrings.helloThere, <i>Henrik</i>))
+        .toEqual(["Hello ", [<i key="1">Henrik</i>], "! Are you sure ", [<i key="3">Henrik</i>], " is your name?"]);
     });
   });
 });
