@@ -36,3 +36,17 @@ describe('getInterfaceLanguage', () => {
     expect(utils.getInterfaceLanguage()).toBe('hu');
   });
 });
+
+describe('validateTranslationKeys', () => {
+  it('does not throw an error when using non-reserved name', () => {
+    expect(() => utils.validateTranslationKeys(['hello'])).not.toThrow();
+  });
+
+  it('throws an error when using reserve name', () => {
+    expect(() => utils.validateTranslationKeys(['_interfaceLanguage'])).toThrow();
+  });
+  
+  it('throws an error when using reserve name with valid names', () => {
+    expect(() => utils.validateTranslationKeys(['hello', '_defaultLanguageFirstLevelKeys'])).toThrow();
+  });
+});

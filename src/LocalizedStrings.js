@@ -21,11 +21,6 @@ import * as utils from './utils';
 const placeholderRegex = /(\{\d+\})/;
 const isReactComponent = value => typeof value.$$typeof === 'symbol';
 
-let reservedNames = [ '_interfaceLanguage',
-                    '_language',
-                    '_defaultLanguage',
-                    '_defaultLanguageFirstLevelKeys',
-                    '_props' ];
 export default class LocalizedStrings {
     _getBestMatchingLanguage(language, props) {
         //If an object with the passed language key exists return it
@@ -49,8 +44,7 @@ export default class LocalizedStrings {
         this._defaultLanguageFirstLevelKeys = [];
         //Store locally the passed strings
         this._props = props;
-        //Check for use of reserved words
-        this._validateProps(props[this._defaultLanguage]);
+        utils.validateTranslationKeys(Object.keys(props[this._defaultLanguage]));
         //Store first level keys (for identifying missing translations)
         for (var key in this._props[this._defaultLanguage]) {
                 if (typeof this._props[this._defaultLanguage][key]=="string") {
@@ -60,13 +54,6 @@ export default class LocalizedStrings {
         //Set language to its default value (the interface)
         this.setLanguage(this._interfaceLanguage);
     }
-
-    _validateProps(props) {
-        Object.keys(props).map(key => {
-            if (reservedNames.indexOf(key)>=0) throw new Error(`${key} cannot be used as a key. It is a reserved word.`)
-        })
-    }
-
 
     //Can be used from ouside the class to force a particular language
     //indipendently from the interface one
