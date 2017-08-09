@@ -1,11 +1,11 @@
 {
   "name": "react-localization",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module, use 'npm run build' before publishing",
   "scripts": {
     "babel-version": "babel --version",
     "test": "jasmine",
-    "build": "babel src --out-dir lib --presets=es2015,stage-2"
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -27,10 +27,11 @@
   "homepage": "https://github.com/stefalda/react-localization#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-plugin-array-includes": "2.0.3",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.22.0",
-    "jasmine": "^2.6.0"
+    "babel-preset-stage-2": "^6.24.1",
+    "jasmine": "^2.7.0"
   },
   "dependencies": {
     "react": "^15.6.1"

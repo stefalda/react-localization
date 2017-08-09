@@ -1,2 +1,4 @@
 # Dependency directories
+.idea
 node_modules
+npm-debug.log
