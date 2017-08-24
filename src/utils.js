@@ -20,7 +20,7 @@ export function validateTranslationKeys(translationKeys) {
     '_props',
   ];
   translationKeys.forEach(key => {
-    if (reservedNames.includes(key)) {
+    if (reservedNames.indexOf(key) !== -1) {
       throw new Error(`${key} cannot be used as a key. It is a reserved word.`);
     }
   });
