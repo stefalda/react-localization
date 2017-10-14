@@ -14,5 +14,5 @@ declare module "react-localization" {
     }
 
     var LocalizedStrings: LocalizedStringsFactory;
-    export = LocalizedStrings;
+    export default LocalizedStrings;
 }
