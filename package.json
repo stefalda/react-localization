@@ -33,6 +33,6 @@
     "jasmine": "^2.7.0"
   },
   "dependencies": {
-    "react": "^15.6.1"
+    "react": "^16.0.0"
   }
 }
