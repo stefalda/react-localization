@@ -18,7 +18,7 @@ import * as utils from './utils';
  * https://github.com/stefalda/react-localization
  */
 
-const placeholderRegex = /(\{\d+\})/;
+const placeholderRegex = /(\{[\d|\w]+\})/;
 const isReactComponent = value => typeof value.$$typeof === 'symbol';
 
 export default class LocalizedStrings {
@@ -83,7 +83,7 @@ export default class LocalizedStrings {
         }
     }
 
-    //Load fallback values for missing translations 
+    //Load fallback values for missing translations
     _fallbackValues(defaultStrings, strings) {
         for (var key in defaultStrings) {
             if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
@@ -121,26 +121,35 @@ export default class LocalizedStrings {
         return this._availableLanguages;
     }
 
-    //Format the passed string replacing the numbered placeholders
-    //i.e. I'd like some {0} and {1}, or just {0}
+    //Format the passed string replacing the numbered or tokenized placeholders
+    //eg. 1: I'd like some {0} and {1}, or just {0}
+    //eg. 2: I'd like some {bread} and {butter}, or just {bread}
     //Use example:
-    //  strings.formatString(strings.question, strings.bread, strings.butter)
+    //eg. 1: strings.formatString(strings.question, strings.bread, strings.butter)
+    //eg. 2: strings.formatString(strings.question, { bread: strings.bread, butter: strings.butter })
     formatString(str, ...valuesForPlaceholders) {
         return str
             .split(placeholderRegex)
             .filter(textPart => !!textPart)
             .map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
-                    const valueForPlaceholder = valuesForPlaceholders[textPart.slice(1, -1)];
-                    return isReactComponent(valueForPlaceholder)
-                        ? React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}))
-                        : valueForPlaceholder;
+                    const matchedKey = textPart.slice(1, -1),
+                          valueForPlaceholder = valuesForPlaceholders[matchedKey];
+
+                    if(valueForPlaceholder) {
+                      if(isReactComponent(valueForPlaceholder)) {
+                        return React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}));
+                      }
+                      return valueForPlaceholder;
+                    } else {
+                      return valuesForPlaceholders[0][matchedKey];
+                    }
                 }
                 return textPart;
             });
     }
 
-    //Return a string with the passed key in a different language 
+    //Return a string with the passed key in a different language
     getString(key, language) {
         try {
             return this._props[language][key];

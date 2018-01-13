@@ -66,11 +66,11 @@ describe('Main Library Functions', function () {
   it('Extract simple value from  other language', function () {
     expect(strings.how).toEqual('Come vuoi il tuo uovo oggi?');
   });
-  
+
   it('Extract complex value from other language', function () {
     expect(strings.ratings.good).toEqual('buono');
   });
-  
+
   it('Get missing key from other language', function () {
     expect(strings.missing).toEqual('missing value');
   });
@@ -130,6 +130,7 @@ describe('Main Library Functions', function () {
         onlyForMembers: "Only who have {0} can enter",
         onlyForMembersStrong: "Only who have {0} can {1}",
         helloThere: "Hello {0}! Are you sure {0} is your name?",
+        namedTokens: "The current date is {month} {day}, {year}!",
       },
       fi: {
         onlyForMembers: "Vain {0} voivat tulla",
@@ -152,5 +153,15 @@ describe('Main Library Functions', function () {
       expect(reactStrings.formatString(reactStrings.helloThere, <i>Henrik</i>))
         .toEqual(["Hello ", [<i key="1">Henrik</i>], "! Are you sure ", [<i key="3">Henrik</i>], " is your name?"]);
     });
+
+    it('Handles named tokens as part of the format string', () => {
+      const formatTokens = {
+        month: "January",
+        day: "12",
+        year: "2018"
+      };
+      expect(reactStrings.formatString(reactStrings.namedTokens, formatTokens))
+        .toEqual(["The current date is ", "January", " ", "12", ", ", "2018", "!"]);
+    })
   });
 });
