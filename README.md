@@ -1,5 +1,5 @@
 # react-localization
-Simple module to localize the React interface using the same syntax used in the 
+Simple module to localize the React interface using the same syntax used in the
 [ReactNativeLocalization module](https://github.com/stefalda/ReactNativeLocalization/).
 
 ## How it works
@@ -59,15 +59,27 @@ Then use the `strings` object literal directly in the render method accessing th
     onlyForMembers: 'You have to {0} in order to use our app',
     bold: 'bold',
     iAmText: 'I am {0} text',
+    ...
+    january: 'January',
+    currentDate: 'The current date is {month} {day}, {year}!'
   }
   ...
   strings.formatString(strings.question, strings.bread, strings.butter)
 
-  // you can also use React component as placeholder values! Useful when using links or customizing style
+  // React components can be used as placeholder values! Useful when using links or customizing style
   strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
   strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
+
+  // Named tokens can also be used to give some extra context to the format strings
+  // You cannot mix tokens, something like formatString('{0}, {name}', 'Hello', {name: 'Bob'}) won't work
+  strings.formatString(strings.currentDate, {
+    month: strings.january,
+    day: 12,
+    year: 2018
+  })
 ```
 **Beware: do not define a string key as formatString!**
+
 * setContent(props) - to dynamically load another set of strings
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
 
@@ -83,4 +95,3 @@ _onSetLanguageToItalian() {
 
 ## Questions or suggestions?
 Feel free to contact me on [Twitter](https://twitter.com/talpaz) or [open an issue](https://github.com/stefalda/react-localization/issues/new).
-
