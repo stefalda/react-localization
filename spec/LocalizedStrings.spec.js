@@ -130,7 +130,8 @@ describe('Main Library Functions', function () {
         onlyForMembers: "Only who have {0} can enter",
         onlyForMembersStrong: "Only who have {0} can {1}",
         helloThere: "Hello {0}! Are you sure {0} is your name?",
-        namedTokens: "The current date is {month} {day}, {year}!",
+        currentDate: "The current date is {month} {day}, {year}!",
+        boldText: "Some {bold} text"
       },
       fi: {
         onlyForMembers: "Vain {0} voivat tulla",
@@ -160,8 +161,14 @@ describe('Main Library Functions', function () {
         day: "12",
         year: "2018"
       };
-      expect(reactStrings.formatString(reactStrings.namedTokens, formatTokens))
+      expect(reactStrings.formatString(reactStrings.currentDate, formatTokens))
         .toEqual(["The current date is ", "January", " ", "12", ", ", "2018", "!"]);
-    })
+    });
+
+    it('Handles named tokens with components', () => {
+      expect(reactStrings.formatString(reactStrings.boldText, {
+        bold: <span className="bold">BOLD</span>
+      })).toEqual(["Some ", [<span key="1" className="bold">BOLD</span>], " text"]);
+    });
   });
 });

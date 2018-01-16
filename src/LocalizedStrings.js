@@ -133,17 +133,18 @@ export default class LocalizedStrings {
             .filter(textPart => !!textPart)
             .map((textPart, index) => {
                 if (textPart.match(placeholderRegex)) {
-                    const matchedKey = textPart.slice(1, -1),
-                          valueForPlaceholder = valuesForPlaceholders[matchedKey];
+                    const matchedKey = textPart.slice(1, -1);
+                    let valueForPlaceholder = valuesForPlaceholders[matchedKey];
 
-                    if(valueForPlaceholder) {
-                      if(isReactComponent(valueForPlaceholder)) {
-                        return React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}));
-                      }
-                      return valueForPlaceholder;
-                    } else {
-                      return valuesForPlaceholders[0][matchedKey];
+                    if(!valueForPlaceholder) {
+                      valueForPlaceholder = valuesForPlaceholders[0][matchedKey];
                     }
+
+                    if(isReactComponent(valueForPlaceholder)) {
+                      return React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}));
+                    }
+
+                    return valueForPlaceholder;
                 }
                 return textPart;
             });
