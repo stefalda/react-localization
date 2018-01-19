@@ -136,8 +136,15 @@ export default class LocalizedStrings {
                     const matchedKey = textPart.slice(1, -1);
                     let valueForPlaceholder = valuesForPlaceholders[matchedKey];
 
-                    if(!valueForPlaceholder) {
-                      valueForPlaceholder = valuesForPlaceholders[0][matchedKey];
+                    // If no value found, check if working with an object instead
+                    if(valueForPlaceholder == undefined) {
+                      const valueFromObjectPlaceholder = valuesForPlaceholders[0][matchedKey];
+                      if(valueFromObjectPlaceholder !== undefined) {
+                        valueForPlaceholder = valueFromObjectPlaceholder;
+                      } else {
+                        // If value still isn't found, then it must have been undefined/null
+                        return valueForPlaceholder;
+                      }
                     }
 
                     if(isReactComponent(valueForPlaceholder)) {
