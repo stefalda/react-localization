@@ -2,8 +2,8 @@ declare module 'react-localization' {
     type Formatted = number | string | JSX.Element;
     type FormatObject<U extends Formatted> = { [key: string]: U };
     
-    export interface GlobalStrings<T> {        
-      [language: string]: T;        
+    export interface GlobalStrings<T> {
+      [language: string]: T;
     }
     
     interface LocalizedStringsMethods {
