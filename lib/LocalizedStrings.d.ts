@@ -6,8 +6,7 @@ declare module 'react-localization' {
       [language: string]: T;        
     }
     
-  
-    export interface LocalizedStringsMethods {
+    interface LocalizedStringsMethods {
         setLanguage(language: string): void;
         getLanguage(): string;
         getInterfaceLanguage(): string;
@@ -23,6 +22,6 @@ declare module 'react-localization' {
         new <T>(props: GlobalStrings<T>): LocalizedStrings<T>;
     }
   
-    var LocalizedStringsFactory: LocalizedStringsFactory;
-    export default LocalizedStringsFactory;
+    var LocalizedStrings: LocalizedStringsFactory;
+    export default LocalizedStrings;
   }
