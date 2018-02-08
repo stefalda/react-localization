@@ -1,11 +1,5 @@
 export function getInterfaceLanguage() {
   const defaultLang = 'en-US';
-
-  // Check if it's running on server side
-  if (typeof window === 'undefined') {
-     return defaultLang;
-  }
-
   if (!!navigator && !!navigator.language) {
     return navigator.language;
   } else if (!!navigator && !!navigator.languages && !!navigator.languages[0]) {
