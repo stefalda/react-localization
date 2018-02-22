@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module, use 'npm run build' before publishing",
   "scripts": {
     "babel-version": "babel --version",
