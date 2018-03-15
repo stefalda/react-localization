@@ -22,6 +22,6 @@ declare module 'react-localization' {
         new <T>(props: GlobalStrings<T>): LocalizedStrings<T>;
     }
   
-    var LocalizedStrings: LocalizedStringsFactory;
-    export default LocalizedStrings;
+    var LocalizedStringsFactory: LocalizedStringsFactory;
+    export default LocalizedStringsFactory;
   }
