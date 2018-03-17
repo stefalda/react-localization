@@ -42,34 +42,6 @@ Then use the `strings` object literal directly in the render method accessing th
   {strings.how}
 </Text>
 ```
-## TYPESCRIPT SUPPORT
-Because of the dynamically generated class properties, it's a little tricky to have the autocomplete functionality working.
-
-Anyway it's possible to gain the desired results by:
-1. defining an Interface that extends the LocalizedStringsMethods interface and has all the object string's keys
-2. defining that the LocalizedStrings instance implements that interface 
-
-This is the suggested solution to work with Typescript:
-
-```js
-export interface IStrings extends LocalizedStringsMethods{
-    score:string;
-    time: String;
-}
-
-public strings: IStrings;
-this.strings = new LocalizedStrings({
-            it: {
-                score: "Punti",
-                time: "Tempo"
-            },
-            en: {
-                score: "Score",
-                time: "Time"
-            }
-        });
-
-```
 ## API
 
 * setLanguage(languageCode) - to force manually a particular language
@@ -119,6 +91,33 @@ _onSetLanguageToItalian() {
   this.setState({});
 }
 ```
+## Typescript support
+Because of the dynamically generated class properties, it's a little tricky to have the autocomplete functionality working.
 
+Anyway it's possible to gain the desired results by:
+1. defining an Interface that extends the LocalizedStringsMethods interface and has all the object string's keys
+2. defining that the LocalizedStrings instance implements that interface 
+
+This is the suggested solution to work with Typescript:
+
+```js
+export interface IStrings extends LocalizedStringsMethods{
+    score:string;
+    time: String;
+}
+
+public strings: IStrings;
+this.strings = new LocalizedStrings({
+            it: {
+                score: "Punti",
+                time: "Tempo"
+            },
+            en: {
+                score: "Score",
+                time: "Time"
+            }
+        });
+
+```
 ## Questions or suggestions?
 Feel free to contact me on [Twitter](https://twitter.com/talpaz) or [open an issue](https://github.com/stefalda/react-localization/issues/new).
