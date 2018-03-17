@@ -1,5 +1,8 @@
 export function getInterfaceLanguage() {
   const defaultLang = 'en-US';
+  if (typeof navigator === "undefined") {
+    return defaultLang;
+  }
   if (!!navigator && !!navigator.language) {
     return navigator.language;
   } else if (!!navigator && !!navigator.languages && !!navigator.languages[0]) {
