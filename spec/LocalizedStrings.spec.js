@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LocalizedStrings from '../src/LocalizedStrings';
+import LocalizedStrings from '../lib/LocalizedStrings';
 
 describe('Main Library Functions', function () {
   global.navigator = {};
