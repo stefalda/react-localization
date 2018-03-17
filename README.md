@@ -3,7 +3,7 @@ Simple module to localize the React interface using the same syntax used in the
 [ReactNativeLocalization module](https://github.com/stefalda/ReactNativeLocalization/).
 
 ### Note about version 1.x
- This library has been refactored to use the newly created [localized-strings package]((https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain
+ This library has been refactored to use the newly created [localized-strings package](https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain
 
 ## How it works
 
