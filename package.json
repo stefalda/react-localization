@@ -33,7 +33,7 @@
     "jasmine": "^2.7.0"
   },
   "dependencies": {
-    "localized-strings": "0.0.5",
+    "localized-strings": "0.0.6",
     "react": "^16.0.0"
   }
 }

@@ -1,2 +1,4 @@
 spec
 src
+.babelrc
+package-lock.json
