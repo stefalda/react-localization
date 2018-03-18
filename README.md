@@ -3,7 +3,9 @@ Simple module to localize the React interface using the same syntax used in the
 [ReactNativeLocalization module](https://github.com/stefalda/ReactNativeLocalization/).
 
 ### Note about version 1.x
- This library has been refactored to use the newly created [localized-strings package]((https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain
+ This library has been refactored to use the newly created [localized-strings package]((https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain.
+
+ All the basic code is now in the localized-strings project but this React version add support for embedding JSX code in the formatted strings, by overriding the formatString method.
 
 ## How it works
 
@@ -45,6 +47,26 @@ Then use the `strings` object literal directly in the render method accessing th
   {strings.how}
 </Text>
 ```
+
+The first language is considered the default one, so if a translation is missing for the selected language, the default one is shown and a line is written to the log as a reminder.
+
+#### Update / Overwrite Locale
+
+You might have default localized in the build but then download the latest localization strings from a server. Use setContent to overwrite the whole object. 
+
+**NOTE** that this will remove all other localizations if used.
+
+```js
+strings.setContent({
+  en:{
+    how:"How do you want your egg todajsie?",
+    boiledEgg:"Boiled eggsie",
+    softBoiledEgg:"Soft-boiled egg",
+    choice:"How to choose the egg"
+  }
+})
+```
+
 ## API
 
 * setLanguage(languageCode) - to force manually a particular language
