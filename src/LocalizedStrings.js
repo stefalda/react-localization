@@ -34,7 +34,8 @@ const placeholderRegex = /(\{[\d|\w]+\})/;
  * THIS METHOD OVERRIDE the one of the parent class by adding support for JSX code      
 */
 LocalizedStrings.prototype.formatString = (str, ...valuesForPlaceholders) => {
-        return str
+        let hasObject = false;
+        const res = str
             .split(placeholderRegex)
             .filter(textPart => !!textPart)
             .map((textPart, index) => {
@@ -54,6 +55,7 @@ LocalizedStrings.prototype.formatString = (str, ...valuesForPlaceholders) => {
                     }
 
                     if(isReactComponent(valueForPlaceholder)) {
+                      hasObject = true;
                       return React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}));
                     }
 
@@ -61,6 +63,9 @@ LocalizedStrings.prototype.formatString = (str, ...valuesForPlaceholders) => {
                 }
                 return textPart;
             });
+          // If the results contains a object return an array otherwise return a string
+          if (hasObject) return res;
+          return res.join('');
     };
 
 export default LocalizedStrings;
