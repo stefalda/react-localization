@@ -15,7 +15,11 @@
     "react-component",
     "react",
     "localization",
-    "internationalization"
+    "internationalization",
+    "javascript",
+    "typescript",
+    "react",
+    "react-component"
   ],
   "main": "./lib/LocalizedStrings.js",
   "types": "./lib/LocalizedStrings.d.ts",
@@ -33,7 +37,7 @@
     "jasmine": "^2.7.0"
   },
   "dependencies": {
-    "localized-strings": "^0.0.9",
+    "localized-strings": "^0.0.10",
     "react": "^16.0.0"
   }
 }
