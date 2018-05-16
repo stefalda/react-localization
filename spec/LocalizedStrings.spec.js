@@ -156,6 +156,11 @@ describe('Main Library Functions', function () {
       .toEqual([0, " ", false, " ", '', " ", null, " ", undefined, " ", NaN].join(''));
   });
 
+  it('Handles empty values', () => {
+    expect(strings.formatString(strings.thisKeyDoesNotExist, { thisReplacement: 'doesNotExist'}))
+      .toEqual('');
+  });
+
   describe('formatString with React components', () => {
     const reactStrings = new LocalizedStrings({
       en: {
