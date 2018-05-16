@@ -10,9 +10,9 @@
  * then display the correct language strings or the default language (the first
  * one if a match is not found).
  *
- * This library has been refactored to use the newly created localized-strings package so to 
+ * This library has been refactored to use the newly created localized-strings package so to
  * unify the code and make it easier to mantain
- * 
+ *
  * How to use:
  * Check the instructions at:
  * https://github.com/stefalda/react-localization
@@ -31,11 +31,11 @@ const placeholderRegex = /(\{[\d|\w]+\})/;
  * eg. 1: strings.formatString(strings.question, strings.bread, strings.butter)
  * eg. 2: strings.formatString(strings.question, { bread: strings.bread, butter: strings.butter }
  *
- * THIS METHOD OVERRIDE the one of the parent class by adding support for JSX code      
+ * THIS METHOD OVERRIDE the one of the parent class by adding support for JSX code
 */
 LocalizedStrings.prototype.formatString = (str, ...valuesForPlaceholders) => {
         let hasObject = false;
-        const res = str
+        const res = (str || '')
             .split(placeholderRegex)
             .filter(textPart => !!textPart)
             .map((textPart, index) => {
