@@ -20,7 +20,6 @@
 
 import React from 'react';
 import LocalizedStrings from 'localized-strings';
-const isReactComponent = value => typeof value.$$typeof === 'symbol';
 const placeholderRegex = /(\{[\d|\w]+\})/;
 
 /**
@@ -54,7 +53,7 @@ LocalizedStrings.prototype.formatString = (str, ...valuesForPlaceholders) => {
                       }
                     }
 
-                    if(isReactComponent(valueForPlaceholder)) {
+                    if(React.isValidElement(valueForPlaceholder)) {
                       hasObject = true;
                       return React.Children.toArray(valueForPlaceholder).map(component => ({...component, key: index.toString()}));
                     }
