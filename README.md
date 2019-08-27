@@ -13,7 +13,7 @@ The library uses the current interface language, then it loads and displays the 
 
 It's possible to force a language different from the interface one.
 
-##Installation
+## Installation
 
 `npm install --save react-localization`
 
