@@ -9,7 +9,7 @@ declare module 'react-localization' {
     export interface LocalizedStringsMethods {
         /**
          * Can be used from ouside the class to force a particular language
-         * indipendently from the interface one
+         * independently from the interface one
          * @param language 
          */
         setLanguage(language: string): void;
