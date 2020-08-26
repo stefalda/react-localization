@@ -89,15 +89,15 @@ strings.setContent({
     currentDate: 'The current date is {month} {day}, {year}!'
   }
   ...
-  strings.formatString(strings.question, strings.bread, strings.butter)
+  strings.question = strings.formatString(strings.question, strings.bread, strings.butter)
 
   // React components can be used as placeholder values! Useful when using links or customizing style
-  strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
-  strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
+  strings.onlyForMembers = strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
+  strings.iAmText = strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
 
   // Named tokens can also be used to give some extra context to the format strings
   // You cannot mix tokens, something like formatString('{0}, {name}', 'Hello', {name: 'Bob'}) won't work
-  strings.formatString(strings.currentDate, {
+  strings.currentDate = strings.formatString(strings.currentDate, {
     month: strings.january,
     day: 12,
     year: 2018
