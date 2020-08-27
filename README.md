@@ -73,7 +73,7 @@ strings.setContent({
 * setLanguage(languageCode) - to force manually a particular language
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
-* formatString() - to format the passed string replacing its placeholders with the other arguments strings
+* formatString() - formats the input string and returns a new string, replacing its placeholders with the other arguments strings
 ```js
   en:{
     bread:"bread",
@@ -89,19 +89,30 @@ strings.setContent({
     currentDate: 'The current date is {month} {day}, {year}!'
   }
   ...
-  strings.question = strings.formatString(strings.question, strings.bread, strings.butter)
+  strings.formatString(strings.question, strings.bread, strings.butter)
 
   // React components can be used as placeholder values! Useful when using links or customizing style
-  strings.onlyForMembers = strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
-  strings.iAmText = strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
+  strings.formatString(strings.onlyForMembers, <a href="http://login.com">{strings.login}</a>)
+  strings.formatString(strings.iAmText, <b>{strings.bold}</b>)
 
   // Named tokens can also be used to give some extra context to the format strings
   // You cannot mix tokens, something like formatString('{0}, {name}', 'Hello', {name: 'Bob'}) won't work
-  strings.currentDate = strings.formatString(strings.currentDate, {
+  strings.formatString(strings.currentDate, {
     month: strings.january,
     day: 12,
     year: 2018
   })
+```
+
+Typical usage is to render it in a JSX with `formatString` calls inlined:
+
+```jsx
+<div>
+ <SomeComponent food={strings.formatString(strings.question, strings.bread, "jam")} />
+ <p>Usage with an object parameter: {
+  strings.formatString(strings.currentDate, { month: "February", day: 13, year: 2050 })
+ }></p>
+</div>
 ```
 **Beware: do not define a string key as formatString!**
 
