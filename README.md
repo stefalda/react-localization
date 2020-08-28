@@ -73,7 +73,7 @@ strings.setContent({
 * setLanguage(languageCode) - to force manually a particular language
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
-* formatString() - to format the passed string replacing its placeholders with the other arguments strings
+* formatString() - formats the input string and returns a new string, replacing its placeholders with the other arguments strings
 ```js
   en:{
     bread:"bread",
@@ -102,6 +102,17 @@ strings.setContent({
     day: 12,
     year: 2018
   })
+```
+
+Typical usage is to render it in a JSX with `formatString` calls inlined:
+
+```jsx
+<div>
+ <SomeComponent food={strings.formatString(strings.question, strings.bread, "jam")} />
+ <p>Usage with an object parameter: {
+  strings.formatString(strings.currentDate, { month: "February", day: 13, year: 2050 })
+ }></p>
+</div>
 ```
 **Beware: do not define a string key as formatString!**
 
