@@ -41,6 +41,6 @@
     "localized-strings": "^0.2.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0 || ^15.6.0"
+    "react": "^17.0.0 || ^16.0.0 || ^15.6.0"
   }
 }
