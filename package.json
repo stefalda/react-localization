@@ -30,15 +30,15 @@
   },
   "homepage": "https://github.com/stefalda/react-localization#readme",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "jasmine": "^2.7.0",
-    "react": "^15.6.0"
+    "jasmine": "^4.5.0",
+    "react": "^18.2.0"
   },
   "dependencies": {
-    "localized-strings": "^0.2.0"
+    "localized-strings": "^0.2.4"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^17.0.0 || ^16.0.0 || ^15.6.0"

@@ -1,200 +1,251 @@
-import React from 'react';
+import LocalizedStrings from "../lib/LocalizedStrings";
+import React from "react";
 
-import LocalizedStrings from '../lib/LocalizedStrings';
-
-describe('Main Library Functions', function () {
+describe("Main Library Functions", function () {
   global.navigator = {};
   let strings;
 
   beforeEach(() => {
     strings = new LocalizedStrings({
       en: {
-        language:"english",
-        how:"How do you want your egg today?",
-        boiledEgg:"Boiled egg",
-        softBoiledEgg:"Soft-boiled egg",
-        choice:"How to choose the egg",
-        formattedValue:"I'd like some {0} and {1}, or just {0}",
+        language: "english",
+        how: "How do you want your egg today?",
+        boiledEgg: "Boiled egg",
+        softBoiledEgg: "Soft-boiled egg",
+        choice: "How to choose the egg",
+        formattedValue: "I'd like some {0} and {1}, or just {0}",
         ratings: {
-          excellent:"excellent",
-          good:"good",
-          missingComplex:"missing value"
+          excellent: "excellent",
+          good: "good",
+          missingComplex: "missing value",
         },
-        missing:"missing value",
+        missing: "missing value",
         currentDate: "The current date is {month} {day}, {year}!",
-        falsy: "{0} {1} {2} {3} {4} {5}"
+        falsy: "{0} {1} {2} {3} {4} {5}",
       },
       it: {
         language: "italian",
-        how:"Come vuoi il tuo uovo oggi?",
-        boiledEgg:"Uovo sodo",
-        softBoiledEgg:"Uovo alla coque",
-        choice:"Come scegliere l'uovo",
+        how: "Come vuoi il tuo uovo oggi?",
+        boiledEgg: "Uovo sodo",
+        softBoiledEgg: "Uovo alla coque",
+        choice: "Come scegliere l'uovo",
         ratings: {
-          excellent:"eccellente",
-          good:"buono"
+          excellent: "eccellente",
+          good: "buono",
         },
-        formattedValue:"Vorrei un po' di {0} e {1}, o solo {0}",
+        formattedValue: "Vorrei un po' di {0} e {1}, o solo {0}",
         currentDate: "La data corrente è {month} {day}, {year}!",
-        falsy: "{0} {1} {2} {3} {4} {5}"
-      }
+        falsy: "{0} {1} {2} {3} {4} {5}",
+      },
     });
   });
 
-  it("Set default language to en", function(){
+  it("Set default language to en", function () {
     expect(strings.getLanguage()).toEqual("en");
   });
 
-  it("List available languages", function(){
+  it("List available languages", function () {
     expect(strings.getAvailableLanguages()).toEqual(["en", "it"]);
   });
 
   //Default language
-  it('Extract simple value from default language', function () {
-    expect(strings.how).toEqual('How do you want your egg today?');
+  it("Extract simple value from default language", function () {
+    expect(strings.how).toEqual("How do you want your egg today?");
   });
-  it('Extract complex value from default language', function () {
-    expect(strings.ratings.good).toEqual('good');
+  it("Extract complex value from default language", function () {
+    expect(strings.ratings.good).toEqual("good");
   });
-  it('Get complex missing key from default language', function () {
-    expect(strings.ratings.missingComplex).toEqual('missing value');
+  it("Get complex missing key from default language", function () {
+    expect(strings.ratings.missingComplex).toEqual("missing value");
   });
-  it('Get missing key from default language', function () {
+  it("Get missing key from default language", function () {
     expect(strings.ratings.notfound).toBe(undefined);
   });
-  it('Format string in default language', function () {
-    expect(strings.formatString(strings.formattedValue, "cake", "ice-cream"))
-      .toEqual("I'd like some cake and ice-cream, or just cake");
+  it("Format string in default language", function () {
+    expect(
+      strings.formatString(strings.formattedValue, "cake", "ice-cream")
+    ).toEqual("I'd like some cake and ice-cream, or just cake");
   });
 
   //Switch language
-  it("Switch language to italian", function(){
+  it("Switch language to italian", function () {
     strings.setLanguage("it");
     expect(strings.getLanguage()).toEqual("it");
   });
-  it('Extract simple value from  other language', function () {
+  it("Extract simple value from  other language", function () {
     strings.setLanguage("it");
-    expect(strings.how).toEqual('Come vuoi il tuo uovo oggi?');
+    expect(strings.how).toEqual("Come vuoi il tuo uovo oggi?");
   });
 
-  it('Extract complex value from other language', function () {
+  it("Extract complex value from other language", function () {
     strings.setLanguage("it");
-    expect(strings.ratings.good).toEqual('buono');
+    expect(strings.ratings.good).toEqual("buono");
   });
 
-  it('Get missing key from other language', function () {
+  it("Get missing key from other language", function () {
     strings.setLanguage("it");
-    expect(strings.missing).toEqual('missing value');
+    expect(strings.missing).toEqual("missing value");
   });
 
-  it('Get complex missing key from other language', function () {
+  it("Get complex missing key from other language", function () {
     strings.setLanguage("it");
-    expect(strings.ratings.missingComplex).toEqual('missing value');
+    expect(strings.ratings.missingComplex).toEqual("missing value");
   });
 
-  it('Format string in other language', function () {
+  it("Format string in other language", function () {
     strings.setLanguage("it");
-    expect(strings.formatString(strings.formattedValue, "torta", "gelato"))
-      .toEqual("Vorrei un po' di torta e gelato, o solo torta");
+    expect(
+      strings.formatString(strings.formattedValue, "torta", "gelato")
+    ).toEqual("Vorrei un po' di torta e gelato, o solo torta");
   });
 
-  it('Get string in a different language', function () {
+  it("Get string in a different language", function () {
     strings.setLanguage("it");
     expect(strings.getString("choice", "en")).toBe("How to choose the egg");
   });
 
-  it('Switch to different props', function () {
+  it("Switch to different props", function () {
     strings.setContent({
       fr: {
-        "hello":"bonjour"
+        hello: "bonjour",
       },
       en: {
-        "hello":"hello"
+        hello: "hello",
       },
       it: {
-        "hello":"ciao"
-      }
+        hello: "ciao",
+      },
     });
     strings.setLanguage("fr");
-    expect(strings.hello).toEqual('bonjour');
+    expect(strings.hello).toEqual("bonjour");
   });
 
-  it('Switch to different props not working', function () {
+  it("Switch to different props not working", function () {
     strings = new LocalizedStrings({
-          en: {
-            a: {
-              b: { x: "foo", y: "bar" },
-              c: { z: "baz" }
-              }
-          }
-          });
+      en: {
+        a: {
+          b: { x: "foo", y: "bar" },
+          c: { z: "baz" },
+        },
+      },
+    });
     strings.setContent({
       en: {
         a: {
           b: { x: "a.b.x", y: "a.b.y" },
-          c: { z: "a.c.z" }
-        }
-      }
+          c: { z: "a.c.z" },
+        },
+      },
     });
     strings.setLanguage("en");
-    expect(strings.a.b.x).toEqual('a.b.x');
+    expect(strings.a.b.x).toEqual("a.b.x");
   });
 
-  it('Handles named tokens as part of the format string', () => {
+  it("Handles named tokens as part of the format string", () => {
     const formatTokens = {
       month: "January",
       day: "12",
-      year: "2018"
+      year: "2018",
     };
-    expect(strings.formatString(strings.currentDate, formatTokens))
-      .toEqual("The current date is January 12, 2018!");
+    expect(strings.formatString(strings.currentDate, formatTokens)).toEqual(
+      "The current date is January 12, 2018!"
+    );
   });
 
-  it('Handles falsy values', () => {
+  it("Handles falsy values", () => {
     // falsy: "{0} {1} {2} {3} {4} {5}"
-    expect(strings.formatString(strings.falsy, 0, false, '', null, undefined, NaN))
-      .toEqual([0, " ", false, " ", '', " ", null, " ", undefined, " ", NaN].join(''));
+    expect(
+      strings.formatString(strings.falsy, 0, false, "", null, undefined, NaN)
+    ).toEqual(
+      [0, " ", false, " ", "", " ", null, " ", undefined, " ", NaN].join("")
+    );
   });
 
-  it('Handles empty values', () => {
-    expect(strings.formatString(strings.thisKeyDoesNotExist, { thisReplacement: 'doesNotExist'}))
-      .toEqual('');
+  it("Handles empty values", () => {
+    expect(
+      strings.formatString(strings.thisKeyDoesNotExist, {
+        thisReplacement: "doesNotExist",
+      })
+    ).toEqual("");
   });
 
-  describe('formatString with React components', () => {
+  describe("formatString with React components", () => {
     const reactStrings = new LocalizedStrings({
       en: {
         onlyForMembers: "Only who have {0} can enter",
         onlyForMembersStrong: "Only who have {0} can {1}",
         helloThere: "Hello {0}! Are you sure {0} is your name?",
-        boldText: "Some {bold} text"
+        boldText: "Some {bold} text",
       },
       fi: {
         onlyForMembers: "Vain {0} voivat tulla",
         onlyForMembersStrong: "Vain {0} voivat {1}",
         helloThere: "Moi {0}! Onko {0} varmasti nimesi?",
-      }
+      },
     });
 
-    it('one React component', () => {
-      expect(reactStrings.formatString(reactStrings.onlyForMembers, <a href="#">logged in</a>))
-        .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can enter"]);
+    it("one React component", () => {
+      expect(
+        reactStrings.formatString(
+          reactStrings.onlyForMembers,
+          <a href="#">logged in</a>
+        )
+      ).toEqual([
+        "Only who have ",
+        [
+          <a href="#" key="1">
+            logged in
+          </a>,
+        ],
+        " can enter",
+      ]);
     });
 
-    it('two React component', () => {
-      expect(reactStrings.formatString(reactStrings.onlyForMembersStrong, <a href="#">logged in</a>, <b>enter</b>))
-        .toEqual(["Only who have ", [<a href="#" key="1">logged in</a>], " can ", [<b key="3">enter</b>]]);
+    it("two React component", () => {
+      expect(
+        reactStrings.formatString(
+          reactStrings.onlyForMembersStrong,
+          <a href="#">logged in</a>,
+          <b>enter</b>
+        )
+      ).toEqual([
+        "Only who have ",
+        [
+          <a href="#" key="1">
+            logged in
+          </a>,
+        ],
+        " can ",
+        [<b key="3">enter</b>],
+      ]);
     });
 
-    it('one React component twice in a string', () => {
-      expect(reactStrings.formatString(reactStrings.helloThere, <i>Henrik</i>))
-        .toEqual(["Hello ", [<i key="1">Henrik</i>], "! Are you sure ", [<i key="3">Henrik</i>], " is your name?"]);
+    it("one React component twice in a string", () => {
+      expect(
+        reactStrings.formatString(reactStrings.helloThere, <i>Henrik</i>)
+      ).toEqual([
+        "Hello ",
+        [<i key="1">Henrik</i>],
+        "! Are you sure ",
+        [<i key="3">Henrik</i>],
+        " is your name?",
+      ]);
     });
 
-    it('Handles named tokens with components', () => {
-      expect(reactStrings.formatString(reactStrings.boldText, {
-        bold: <span className="bold">BOLD</span>
-      })).toEqual(["Some ", [<span key="1" className="bold">BOLD</span>], " text"]);
+    it("Handles named tokens with components", () => {
+      expect(
+        reactStrings.formatString(reactStrings.boldText, {
+          bold: <span className="bold">BOLD</span>,
+        })
+      ).toEqual([
+        "Some ",
+        [
+          <span key="1" className="bold">
+            BOLD
+          </span>,
+        ],
+        " text",
+      ]);
     });
   });
 });
