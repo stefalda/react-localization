@@ -3,10 +3,11 @@
 Simple module to localize the React interface using the same syntax used in the
 [ReactNativeLocalization module](https://github.com/stefalda/ReactNativeLocalization/).
 
-## React 19 or previous versions
+## React 19 support
 
-Version 2.0 has been recreated to support React 19. If you work with previous
-versions you can use version 1.x.
+Version 2.0 has been recreated to support React 19, removing babel and adding vite tooling. 
+
+If you work with previous versions of react you can use version 1.x.
 
 ### Note about version 1.x
 
