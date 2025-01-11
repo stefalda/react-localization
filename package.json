@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "type": "module",
   "main": "./dist/react-localization.umd.js",
@@ -38,10 +38,10 @@
     "url": "https://github.com/stefalda/react-localization/issues"
   },
   "homepage": "https://github.com/stefalda/react-localization#readme",
-"peerDependencies": {
-  "react": ">=19.0.0",
-  "react-dom": ">=19.0.0"
-},
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
   "devDependencies": {
     "@testing-library/react": "^16.1.0",
     "@types/node": "^22.10.5",
@@ -59,12 +59,11 @@
     "localized-strings": "^1.0.0"
   },
   "peerDependenciesMeta": {
-  "react": {
-    "optional": true
-  },
-  "react-dom": {
-    "optional": true
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   }
-}
-
 }
