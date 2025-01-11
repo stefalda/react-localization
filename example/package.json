@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "2.0.2",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",
