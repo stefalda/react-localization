@@ -199,7 +199,7 @@ L.prototype.formatString = (i, ...e) => {
       const l = s.slice(1, -1);
       let r = e[l];
       if (r == null) {
-        const u = e[0][l];
+        const u = e[0] ? e[0][l] : void 0;
         if (u !== void 0)
           r = u;
         else

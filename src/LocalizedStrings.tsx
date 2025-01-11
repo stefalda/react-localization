@@ -44,7 +44,7 @@ LocalizedStrings.prototype.formatString = (str: string, ...valuesForPlaceholders
 
         // If no value found, check if working with an object instead
         if (valueForPlaceholder == undefined) {
-          const valueFromObjectPlaceholder = valuesForPlaceholders[0][matchedKey];
+          const valueFromObjectPlaceholder = valuesForPlaceholders[0]?valuesForPlaceholders[0][matchedKey]:undefined;
           if (valueFromObjectPlaceholder !== undefined) {
             valueForPlaceholder = valueFromObjectPlaceholder;
           } else {

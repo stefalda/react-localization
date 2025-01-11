@@ -48,7 +48,6 @@ function App() {
         <button style={{marginTop:20, width:'300px', height:'40px'}} onClick={switchLanguage}>
         {strings.formatString(strings.change, <i>{language}</i>)}
           </button>
-          
       </header>
     </div>
   );
