@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "type": "module",
   "main": "./lib/react-localization.umd.js",
@@ -21,7 +21,6 @@
     "build:vite": "vite build",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:vite && npm run build:types"
-
   },
   "repository": {
     "type": "git",
