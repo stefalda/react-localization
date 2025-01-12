@@ -3,22 +3,25 @@
   "version": "2.0.3",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "type": "module",
-  "main": "./dist/react-localization.umd.js",
-  "module": "./dist/react-localization.es.js",
-  "types": "./dist/LocalizedStrings.d.ts",
+  "main": "./lib/react-localization.umd.js",
+  "module": "./lib/react-localization.es.js",
+  "types": "./lib/LocalizedStrings.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/react-localization.es.js"
+      "import": "./lib/react-localization.es.js"
     }
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
     "test": "vitest",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "build:vite": "vite build",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run build:vite && npm run build:types"
+
   },
   "repository": {
     "type": "git",
@@ -56,7 +59,7 @@
     "jsdom": "^26.0.0"
   },
   "dependencies": {
-    "localized-strings": "^1.0.0"
+    "localized-strings": "^2.0.3"
   },
   "peerDependenciesMeta": {
     "react": {

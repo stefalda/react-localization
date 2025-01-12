@@ -11,6 +11,8 @@ const pkg = require('./package.json');
 export default defineConfig({
     plugins: [react() as any],
     build: {
+        outDir: 'lib/',
+        emptyOutDir: true,
         lib: {
             entry: resolve(__dirname, 'src/LocalizedStrings.tsx'),
             name: 'ReactLocalization',
