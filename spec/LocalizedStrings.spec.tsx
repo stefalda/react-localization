@@ -204,5 +204,11 @@ describe('Main Library Functions', () => {
         bold: <span className="bold"> BOLD </span>
       })).toEqual(["Some ", [<span key="1" className = "bold" > BOLD </span>], " text"]);
     });
+
+        //onlyForMembersStrong: "Only who have {0} can {1}"
+    it('shouldn\'t crash when parameters are null or undefined', () => {
+          expect(reactStrings.formatString(reactStrings.onlyForMembersStrong, null, undefined))
+            .toEqual("Only who have  can ");
+        });
   });
 });
