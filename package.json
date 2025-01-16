@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./lib/react-localization.umd.js",
   "module": "./lib/react-localization.es.js",
-  "types": "./lib/LocalizedStrings.d.ts",
+  "types": "./lib/react-localization.d.ts",
   "exports": {
     ".": {
       "import": "./lib/react-localization.es.js"
