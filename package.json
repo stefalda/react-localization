@@ -1,6 +1,6 @@
 {
   "name": "react-localization",
-  "version": "2.0.6",
+  "version": "2.0.5",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "type": "module",
   "main": "./lib/react-localization.umd.js",
