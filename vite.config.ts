@@ -14,10 +14,12 @@ export default defineConfig({
         outDir: 'lib/',
         emptyOutDir: true,
         lib: {
-            entry: resolve(__dirname, 'src/LocalizedStrings.tsx'),
+            entry: resolve(import.meta.dirname, 'src/LocalizedStrings.tsx'),
             name: 'ReactLocalization',
             formats: ['es', 'umd'],
-            fileName: (format) => `react-localization.${format}.js`
+            fileName: (format) => format === 'umd'
+                ? 'react-localization.umd.cjs'
+                : `react-localization.${format}.js`
         },
         rollupOptions: {
             external: [...Object.keys(pkg.peerDependencies)],
@@ -32,6 +34,11 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         include: ['spec/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+        // Test the source directly instead of the built lib/ artifact, so a
+        // stale build can never make the suite pass/fail incorrectly.
+        alias: {
+            'react-localization': resolve(import.meta.dirname, 'src/LocalizedStrings.tsx')
+        }
     }
 });
 

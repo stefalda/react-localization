@@ -39,12 +39,16 @@ declare module 'react-localization' {
          * @param key
          * @param language
          */
-        getString(key: string, language?: string, omitWarning?: boolean): string;
+        getString(key: string, language?: string | null, omitWarning?: boolean): string | null;
         /**
          * Replace the NamedLocalization object without reinstantiating the object
          * @param props
          */
         setContent(props: any): void;
+        /**
+         * Return the whole content object (all the languages/strings)
+         */
+        getContent(): GlobalStrings<any>;
     }
     export type LocalizedStrings<T> = LocalizedStringsMethods & T;
     type GetInterfaceLanguageCallback = () => string;

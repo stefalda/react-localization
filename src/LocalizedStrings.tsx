@@ -18,9 +18,10 @@
  * https://github.com/stefalda/react-localization
  */
 
-import LocalizedStrings from 'localized-strings';
+import LocalizedStrings, { type LocalizedStringsMethods } from 'localized-strings';
 import React from 'react';
-const placeholderRegex = /(\{[\d|\w]+\})/;
+const placeholderRegex = /(\{\w+\})/;
+const referenceRegex = /(\$ref\{[\w|.]+\})/;
 
 /**
  * Format the passed string replacing the numbered or tokenized placeholders
@@ -30,11 +31,34 @@ const placeholderRegex = /(\{[\d|\w]+\})/;
  * eg. 1: strings.formatString(strings.question, strings.bread, strings.butter)
  * eg. 2: strings.formatString(strings.question, { bread: strings.bread, butter: strings.butter }
  *
- * THIS METHOD OVERRIDE the one of the parent class by adding support for JSX code
+ * THIS METHOD OVERRIDE the one of the parent class only to add support for JSX
+ * values. The string-key resolution (dot-notation) and the $ref{...} expansion
+ * are kept in sync with the localized-strings implementation so that the
+ * behaviour doesn't diverge from the parent package.
 */
-LocalizedStrings.prototype.formatString = (str: string, ...valuesForPlaceholders: any) => {
+LocalizedStrings.prototype.formatString = function (
+  this: LocalizedStringsMethods,
+  str: string,
+  ...valuesForPlaceholders: any
+) {
+  // Resolve the passed string as a key (dot-notation supported), falling back
+  // to the string itself when it isn't a known key, exactly like the parent.
+  const source = str ? this.getString(str, null, true) || str : '';
+  // Expand any $ref{...} reference before doing the placeholder substitution.
+  const resolved = source
+    .split(referenceRegex)
+    .filter(textPart => !!textPart)
+    .map(textPart => {
+      if (textPart.match(referenceRegex)) {
+        const referenceKey = textPart.slice(5, -1);
+        return this.getString(referenceKey) || `$ref(id:${referenceKey})`;
+      }
+      return textPart;
+    })
+    .join('');
+
   let hasObject = false;
-  const res = (str || '')
+  const res = resolved
     .split(placeholderRegex)
     .filter(textPart => !!textPart)
     .map((textPart, index) => {
@@ -55,7 +79,11 @@ LocalizedStrings.prototype.formatString = (str: string, ...valuesForPlaceholders
 
         if (React.isValidElement(valueForPlaceholder)) {
           hasObject = true;
-          return React.Children.toArray(valueForPlaceholder).map(component => ({ ...component as any, key: index.toString() }));
+          // cloneElement is the supported way to add a key to an existing
+          // element; spreading the element object is discouraged in React
+          return React.Children.toArray(valueForPlaceholder).map(component =>
+            React.cloneElement(component as React.ReactElement, { key: index.toString() })
+          );
         }
 
         return valueForPlaceholder;

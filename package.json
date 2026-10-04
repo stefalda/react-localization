@@ -1,24 +1,26 @@
 {
   "name": "react-localization",
-  "version": "2.0.6",
+  "version": "2.1.0",
   "description": "Simple module to localize the React interface using the same syntax used in the ReactNativeLocalization module",
   "type": "module",
-  "main": "./lib/react-localization.umd.js",
+  "main": "./lib/react-localization.umd.cjs",
   "module": "./lib/react-localization.es.js",
   "types": "./lib/react-localization.d.ts",
   "exports": {
     ".": {
-      "require": "./lib/react-localization.es.js",
       "types": "./lib/react-localization.d.ts",
-      "import": "./lib/react-localization.es.js"
+      "import": "./lib/react-localization.es.js",
+      "require": "./lib/react-localization.umd.cjs"
     }
   },
   "files": [
-    "lib"
+    "lib",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "dev": "vite",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "npm run build",
     "build:vite": "vite build",
     "build:types": "tsc --emitDeclarationOnly",
@@ -47,20 +49,20 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^16.1.0",
-    "@types/node": "^22.10.5",
-    "@types/react": "^19.0.4",
-    "@types/react-dom": "^19.0.2",
-    "@vitejs/plugin-react": "^4.3.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.7",
-    "vitest": "^2.1.8",
-    "jsdom": "^26.0.0"
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3",
+    "jsdom": "^30.1.1"
   },
   "dependencies": {
-    "localized-strings": "^2.0.3"
+    "localized-strings": "^2.1.2"
   },
   "peerDependenciesMeta": {
     "react": {

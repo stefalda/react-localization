@@ -8,6 +8,7 @@
     "declaration": true,           // This enables .d.ts file generation
     "declarationDir": "./lib",     // This specifies where .d.ts files go
     "emitDeclarationOnly": true,   // This tells tsc to only emit declarations
+    "rootDir": "./src",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,

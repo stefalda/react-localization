@@ -126,6 +126,13 @@ strings.setContent({
     day: 12,
     year: 2018
   })
+
+  // A key can also be passed directly (dot-notation is supported)
+  strings.formatString('fridge.bread')
+
+  // Other localized strings can be referenced with $ref{key}
+  // en: { bread: 'bread', questionWithReferences: 'I\'d like $ref{bread}' }
+  strings.formatString(strings.questionWithReferences)
 ```
 
 Typical usage is to render it in a JSX with `formatString` calls inlined:
@@ -149,6 +156,9 @@ Typical usage is to render it in a JSX with `formatString` calls inlined:
 **Beware: do not define a string key as formatString!**
 
 - setContent(props) - to dynamically load another set of strings
+- getContent() - to get the whole content object (all languages/strings)
+- getString(key, language?, omitWarning?) - to get a single string, dot-notation
+  supported
 - getAvailableLanguages() - to get an array of the languages passed in the
   constructor
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import LocalizedStrings from 'react-localization';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 
 // Define types for the string configurations
@@ -27,8 +27,8 @@ interface StringsContent {
 }
 
 describe('Main Library Functions', () => {
-  // Mock global navigator
-  global.navigator = {} as Navigator;
+  // Mock global navigator (jsdom exposes it as a getter-only property)
+  vi.stubGlobal('navigator', {} as Navigator);
   let strings: LocalizedStrings<StringConfig>;
 
   beforeEach(() => {
@@ -131,6 +131,19 @@ describe('Main Library Functions', () => {
   it('should get string in a different language', () => {
     strings.setLanguage("it");
     expect(strings.getString("choice", "en")).toBe("How to choose the egg");
+  });
+
+  // Reference resolution tests (aligned with the localized-strings behaviour)
+  it('should resolve a string key with dot-notation', () => {
+    expect(strings.formatString('ratings.good')).toBe('good');
+  });
+
+  it('should expand $ref references before formatting', () => {
+    expect(strings.formatString('I think it is $ref{ratings.good}!')).toBe('I think it is good!');
+  });
+
+  it('should keep supporting placeholders together with $ref references', () => {
+    expect(strings.formatString('$ref{ratings.good}: {0}!', 'nice')).toBe('good: nice!');
   });
 
   // Content switching tests
